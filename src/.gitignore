@@ -1,0 +1,10 @@
+*~
+*.o
+*.c
+*.stamp
+.deps
+.libs
+Makefile
+Makefile.in
+*.stamp
+tabler

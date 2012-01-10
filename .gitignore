@@ -1,0 +1,17 @@
+*~
+aclocal.m4
+.anjuta*
+autom4te.cache
+config.guess
+config.*
+configure
+depcomp
+INSTALL
+install-sh
+libtool
+ltmain.sh
+Makefile
+Makefile.in
+missing
+stamp-h1
+*.anjuta
