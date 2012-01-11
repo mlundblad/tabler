@@ -3,7 +3,10 @@ aclocal.m4
 .anjuta*
 autom4te.cache
 config.guess
-config.*
+config.h*
+config.log
+config.status
+config.sub
 configure
 depcomp
 INSTALL
