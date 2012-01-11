@@ -20,7 +20,7 @@ AM_CFLAGS =\
 bin_PROGRAMS = tabler
 
 tabler_SOURCES = \
-	tabler.vala config.vapi
+	tabler.vala config.vapi table.vala
 
 tabler_VALAFLAGS =  \
 	--pkg gtk+-3.0
