@@ -21,5 +21,5 @@ public abstract class Tabler.Table : GLib.Object {
 	protected uint capacity { get; private set; }
 	protected string name { get; set; }
 
-	public abstract void get_extents(out uint w, out uint h);
+	public abstract void get_extents (out uint w, out uint h);
 }
