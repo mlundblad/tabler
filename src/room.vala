@@ -21,11 +21,64 @@ using Gee;
 
 public class Tabler.Room : GLib.Object {
 
-	private Gee.List<Table> tables = new Gee.ArrayList<Table>();
+	private class TableSlot {
+		Table table { get; set; }
+		uint x { get; set; }
+		uint y { get; set; }
+	}
+
+	private Gee.List<TableSlot> tables = new Gee.ArrayList<TableSlot>();
+	// keep track of occupied slots, to simplify things...
+	private bool[,] occupied_slots;
 	
-    // Constructor
-    public Room () {
-        
-    }
+	private uint width { get; private set; }
+	private uint height { get; private set; }
+		
+	public Room (uint width, uint height) {
+		resize (width, height);
+	}
+
+	public bool is_occupied (uint x, uint y) {
+		return occupied_slots[x, y];
+	}
+	
+	public bool resize (uint width, uint height) {
+		if (occupied_slots == null) {
+			// if this is called the first time, create the occupation array
+			occupied_slots = new bool[width, height];
+			return true;
+		}
+
+		// check if grid can be resized to the new size
+		// check that the "clipped" area is unoccupied
+
+		for (uint x = width ; x < this.width ; x++) {
+			for (uint y = 0 ; y < this.height ; y++) {
+				if (is_occupied (x, y)) {
+					return false;
+				}
+			}
+		}
+
+		for (uint x = 0 ; x < this.width ; x++) {
+			for (uint y = height ; y < this.height ; y++) {
+				if (is_occupied (x, y)) {
+					return false;
+				}
+			}
+		}
+
+		bool[,] occ_temp = new bool[width, height];
+
+		for (int x = 0 ; x < (this.width < width ? this.width : width) ; x++) {
+			for (int y = 0 ; y < (this.height < height ? this.height : height) ;
+			     y++) {
+				occ_temp[x, y] = occupied_slots[x, y];
+			}
+		}
+		occupied_slots = occ_temp;
+		
+		return true;
+	}
 
 }
