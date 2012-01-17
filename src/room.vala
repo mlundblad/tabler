@@ -25,6 +25,12 @@ public class Tabler.Room : GLib.Object {
 		Table table { get; set; }
 		uint x { get; set; }
 		uint y { get; set; }
+
+		public TableSlot (Table table, uint x, uint y) {
+			this.table = table;
+			this.x = x;
+			this.y = y;
+		}
 	}
 
 	private Gee.List<TableSlot> tables = new Gee.ArrayList<TableSlot>();
@@ -102,5 +108,24 @@ public class Tabler.Room : GLib.Object {
 		}
 
 		return true;
+	}
+
+	public bool add_table (Table table, uint x, uint y) {
+		if (can_table_fit (table, x, y)) {
+			uint tw, th;
+
+			tables.add (new TableSlot (table, x, y));
+			table.get_extents (out tw, out th);
+
+			for (uint x1 = x ; x1 < x + tw ; x1++) {
+				for (uint y1 = y ; y1 < y + th ; y1++) {
+					occupied_slots[x1, y1] = true;
+				}
+			}
+
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
