@@ -81,4 +81,26 @@ public class Tabler.Room : GLib.Object {
 		return true;
 	}
 
+	public bool can_table_fit (Table table, uint x, uint y) {
+		uint tw, th;
+		bool result = true;
+
+		table.get_extents (out tw, out th);
+
+		// table won't fit if too close to one of the edges
+		if (x + tw > width || y + th > height) {
+			return false;
+		}
+		
+		// check needed slots
+		for (uint x1 = x ; x1 < x + tw ; x1++) {
+			for (uint y1 = y ; y1 < y + th ; y1++) {
+				if (is_occupied (x1, y1)) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
 }
