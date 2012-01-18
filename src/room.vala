@@ -128,4 +128,8 @@ public class Tabler.Room : GLib.Object {
 			return false;
 		}
 	}
+
+	public Iterator iterator () {
+		return tables.iterator ();
+	}
 }
