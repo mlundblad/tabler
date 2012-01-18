@@ -21,10 +21,10 @@ using Gee;
 
 public class Tabler.Room : GLib.Object {
 
-	private class TableSlot {
-		Table table { get; set; }
-		uint x { get; set; }
-		uint y { get; set; }
+	public class TableSlot {
+		public Table table { get; set; }
+		public uint x { get; set; }
+		public uint y { get; set; }
 
 		public TableSlot (Table table, uint x, uint y) {
 			this.table = table;
@@ -130,5 +130,25 @@ public class Tabler.Room : GLib.Object {
 
 	public Iterator iterator () {
 		return tables.iterator ();
+	}
+
+	public bool remove_table (Table table) {
+		foreach (var slot in tables) {
+			if (slot.table == table) {
+				uint w, h;
+				table.get_extents (out w, out h);
+
+				for (var x = slot.x ; x < slot.x + w ; x++) {
+					for (var y = slot.y ; y < slot.y + h ; y++) {
+						occupied_slots[x, y] = false;
+					}
+				}
+
+				tables.remove (slot);
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
