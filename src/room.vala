@@ -89,7 +89,6 @@ public class Tabler.Room : GLib.Object {
 
 	public bool can_table_fit (Table table, uint x, uint y) {
 		uint tw, th;
-		bool result = true;
 
 		table.get_extents (out tw, out th);
 
