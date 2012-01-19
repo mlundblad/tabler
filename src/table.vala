@@ -20,6 +20,12 @@ tabler is free software: you can redistribute it and/or modify it
 public abstract class Tabler.Table : GLib.Object {
 	protected uint capacity { get; private set; }
 	protected string name { get; set; }
+	protected Guest[] guests;
+
+	public Table (uint capacity) {
+		this.capacity = capacity;
+		this.guests = new Guest[capacity];
+	}
 
 	public abstract void get_extents (out uint w, out uint h);
 }
