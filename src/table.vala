@@ -22,9 +22,34 @@ public abstract class Tabler.Table : GLib.Object {
 	protected string name { get; set; }
 	protected Guest[] guests;
 
+	public class Iterator {
+		uint index;
+		uint size;
+		Guest[] guests;
+
+		internal Iterator (Guest[] guests, uint size) {
+			this.guests = guests;
+			this.size = size;
+		}
+
+		public bool next () {
+			return index < size;
+		}
+
+		public Guest? get () {
+			index++;
+			return guests[index - 1];
+		}
+	}
+			
+	
 	public Table (uint capacity) {
 		this.capacity = capacity;
 		this.guests = new Guest[capacity];
+	}
+
+	public Iterator iterator () {
+		return new Iterator (this.guests, this.capacity);
 	}
 
 	public abstract void get_extents (out uint w, out uint h);
