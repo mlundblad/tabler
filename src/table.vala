@@ -41,8 +41,7 @@ public abstract class Tabler.Table : GLib.Object {
 			return guests[index - 1];
 		}
 	}
-			
-	
+
 	public Table (uint capacity) {
 		this.capacity = capacity;
 		this.guests = new Guest[capacity];
