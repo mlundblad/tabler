@@ -25,6 +25,8 @@ public class Tabler.RoundTable : Tabler.Table {
     }
 
 	public override void get_extents (out uint width, out uint height) {
-		// TODO: calculate extent based on number of seats (capacity)
+		var diam = GLib.Math.ceil (capacity / 4);
+		width = (uint) diam + 2;
+		height = (uint) diam + 2;
 	}
 }
