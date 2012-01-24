@@ -157,4 +157,8 @@ public class Tabler.Room : GLib.Object {
 	public void add_guest (Guest guest) {
 		guests.set (guest.name, guest);
 	}
+
+	public Gee.Collection<Guest> get_guests () {
+		return guests.values;
+	}
 }
