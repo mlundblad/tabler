@@ -19,7 +19,7 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.Guest : GLib.Object {
 
-	private string name { get; set; }
+	public string name { get; set; }
 	
     // Constructor
     public Guest (string name) {
