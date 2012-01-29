@@ -53,8 +53,8 @@ public abstract class Tabler.Table : GLib.Object {
 
 	public abstract void get_extents (out uint w, out uint h);
 
-	public void insert_guest (Guest guest, uint position) {
-		// TODO: throw an error when going out-of-bounds
+	public void insert_guest (Guest guest, uint position)
+		requires (position < capacity) {
 		guests[position] = guest;
 	}
 }
