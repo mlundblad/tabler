@@ -17,15 +17,8 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Tabler.Guest : GLib.Object {
-
-	public string name { get; set; }
-	public Gender gender { get; set; }
-	
-    // Constructor
-    public Guest (string name, Gender gender = Gender.UNKNOWN) {
-        this.name = name;
-		this.gender = gender;
-    }
-
+public enum Tabler.Gender {
+	UNKNOWN,
+	MALE,
+	FEMALE
 }
