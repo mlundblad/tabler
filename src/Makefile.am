@@ -20,10 +20,10 @@ AM_CFLAGS =\
 bin_PROGRAMS = tabler
 
 tabler_SOURCES = \
-	tabler.vala config.vapi table.vala guest.vala room.vala round-table.vala long-table.vala gender.vala
+	tabler.vala config.vapi table.vala guest.vala room.vala round-table.vala long-table.vala gender.vala xml-serializable.vala
 
 tabler_VALAFLAGS =  \
-	--pkg gtk+-3.0 --pkg gee-1.0
+	--pkg gtk+-3.0 --pkg gee-1.0 --pkg libxml-2.0
 
 tabler_LDFLAGS = \
 	-Wl,--export-dynamic
