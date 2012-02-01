@@ -39,9 +39,7 @@ public class Tabler.Room : GLib.Object {
 	
 	private uint width { get; private set; }
 	private uint height { get; private set; }
-
-	private Gee.HashMap<string, Guest> guests;
-		
+	
 	public Room (uint width, uint height) {
 		resize (width, height);
 	}
@@ -152,13 +150,5 @@ public class Tabler.Room : GLib.Object {
 		}
 
 		return false;
-	}
-
-	public void add_guest (Guest guest) {
-		guests.set (guest.name, guest);
-	}
-
-	public Gee.Collection<Guest> get_guests () {
-		return guests.values;
 	}
 }
