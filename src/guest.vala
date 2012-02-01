@@ -17,7 +17,7 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Tabler.Guest : GLib.Object {
+public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 
 	public string name { get; set; }
 	public Gender gender { get; set; }
@@ -28,4 +28,14 @@ public class Tabler.Guest : GLib.Object {
 		this.gender = gender;
     }
 
+	public Xml.Node* to_xml () {
+		Xml.Node* node = new Xml.Node (null, "guest");
+	
+		node->new_prop ("name", name);
+		node->new_prop ("gender",
+		                gender == Gender.MALE ? "male" :
+			            gender == Gender.FEMALE ? "female" : "unknown");
+
+		return node;
+	}
 }
