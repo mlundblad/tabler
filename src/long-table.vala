@@ -19,7 +19,7 @@ tabler is free software: you can redistribute it and/or modify it
 
 using GLib;
 
-public class Tabler.LongTable : Tabler.Table {
+public class Tabler.LongTable : Tabler.Table, Tabler.XmlSerializable {
 
 	public enum Orientation {
 		HORIZONTAL,
@@ -75,5 +75,12 @@ public class Tabler.LongTable : Tabler.Table {
 			width = breadth;
 			height = length;
 		}
+	}
+
+	public Xml.Node* to_xml () {
+		Xml.Node* node = base.to_xml ();
+
+		node->new_prop ("type", "long");
+		return node;
 	}
 }
