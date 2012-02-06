@@ -17,7 +17,7 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Tabler.RoundTable : Tabler.Table, Tabler.XmlSerializable {
+public class Tabler.RoundTable : Tabler.Table {
 
     // Constructor
     public RoundTable (uint capacity) {
@@ -30,8 +30,8 @@ public class Tabler.RoundTable : Tabler.Table, Tabler.XmlSerializable {
 		height = (uint) diam + 2;
 	}
 
-	public Xml.Node* to_xml () {
-		Xml.Node* node = base.to_xml ();
+	public override Xml.Node* to_xml () {
+		Xml.Node* node = to_xml_basic ();
 
 		node->new_prop ("type", "round");
 		return node;

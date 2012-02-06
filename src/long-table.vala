@@ -77,8 +77,8 @@ public class Tabler.LongTable : Tabler.Table, Tabler.XmlSerializable {
 		}
 	}
 
-	public Xml.Node* to_xml () {
-		Xml.Node* node = base.to_xml ();
+	public override Xml.Node* to_xml () {
+		Xml.Node* node = to_xml_basic ();
 
 		node->new_prop ("type", "long");
 		return node;

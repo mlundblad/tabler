@@ -17,7 +17,9 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public abstract class Tabler.Table : GLib.Object, XmlSerializable {
+using Xml;
+
+public abstract class Tabler.Table : GLib.Object, Tabler.XmlSerializable {
 	protected uint capacity { get; private set; }
 	protected string name { get; set; }
 	protected Guest[] guests;
@@ -58,7 +60,9 @@ public abstract class Tabler.Table : GLib.Object, XmlSerializable {
 		guests[position] = guest;
 	}
 
-	public Xml.Node* to_xml () {
+	public abstract Xml.Node* to_xml ();
+	
+	public Xml.Node* to_xml_basic () {
 		Xml.Node* node = new Xml.Node (null, "table");
 
 		node->new_prop ("capacity", capacity.to_string ());
