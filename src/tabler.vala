@@ -60,6 +60,19 @@ public class Main : Object
 		Gtk.init (ref args);
 		var app = new Main ();
 
+		// test code...
+		var arrangement = new Tabler.Arrangement ();
+		var room = new Tabler.Room (32, 32);
+		var table = new Tabler.LongTable (10,
+		                                  Tabler.LongTable.Orientation.HORIZONTAL,
+		                                  new Tabler.LongTable.Setting ());
+    
+		arrangement.add_room (room);
+		room.add_table (table, 2, 2);
+
+		Xml.Node* xml = table.to_xml ();
+		//stdout.printf ("xml: %s\n", xml.to_string ());
+		
 		Gtk.main ();
 		
 		return 0;
