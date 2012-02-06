@@ -25,6 +25,11 @@ public class Tabler.Arrangement : GLib.Object {
 
 	private Gee.List<Room> rooms { get; private set; }
 
+	public Arrangement () {
+		guests = new Gee.HashMap<string, Guest> ();
+		rooms = new Gee.ArrayList<Room> ();
+	}
+
 	public void add_guest (Guest guest) {
 		guests.set (guest.name, guest);
 	}
