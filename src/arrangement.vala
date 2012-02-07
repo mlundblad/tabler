@@ -19,7 +19,7 @@ tabler is free software: you can redistribute it and/or modify it
 
 using Gee;
 
-public class Tabler.Arrangement : GLib.Object {
+public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 
 	private Gee.HashMap<string, Guest> guests { get; private set; }
 
@@ -36,5 +36,12 @@ public class Tabler.Arrangement : GLib.Object {
 
 	public void add_room (Room room) {
 		rooms.add (room);
+	}
+
+	public Xml.Node* to_xml () {
+		//TODO: generate real XML here...
+		Xml.Node* node = new Xml.Node (null, "arrangement");
+
+		return node;
 	}
 }

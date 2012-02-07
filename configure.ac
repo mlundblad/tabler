@@ -18,7 +18,7 @@ LT_INIT
 dnl Check for vala
 AM_PROG_VALAC([0.10.0])
 
-PKG_CHECK_MODULES(TABLER, [gtk+-3.0 gee-1.0 libxml-2.0])
+PKG_CHECK_MODULES(TABLER, [gtk+-3.0 gee-1.0 libxml-2.0 gio-2.0])
 
 
 AC_OUTPUT([

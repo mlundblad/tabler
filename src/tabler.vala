@@ -70,9 +70,12 @@ public class Main : Object
 		arrangement.add_room (room);
 		room.add_table (table, 2, 2);
 
-		Xml.Node* xml = table.to_xml ();
-		//stdout.printf ("xml: %s\n", xml.to_string ());
-		
+		try {
+			Tabler.save_to_file (arrangement, "test.tabler");
+		} catch (Error e) {
+			stderr.printf ("Failed to save file: %s\n", e.message);
+		}
+			
 		Gtk.main ();
 		
 		return 0;
