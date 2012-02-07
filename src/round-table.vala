@@ -31,7 +31,7 @@ public class Tabler.RoundTable : Tabler.Table {
 	}
 
 	public override Xml.Node* to_xml () {
-		Xml.Node* node = to_xml_basic ();
+		Xml.Node* node = base.to_xml ();
 
 		node->new_prop ("type", "round");
 		return node;
