@@ -39,6 +39,8 @@ public class Tabler.Room : GLib.Object {
 	
 	private uint width { get; private set; }
 	private uint height { get; private set; }
+
+	public string name { get; set; }
 	
 	public Room (uint width, uint height) {
 		resize (width, height);
