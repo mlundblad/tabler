@@ -43,6 +43,16 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 		//TODO: generate real XML here...
 		Xml.Node* node = new Xml.Node (null, "arrangement");
 
+		if (name != null && name.length > 0)
+			node->new_prop ("name", name);
+
+		// put guest list in a <guests/> element
+		Xml.Node* guests_node = node->new_child (null, "guests");
+
+		foreach (var guest in guests.values) {
+			guests_node->add_child (guest.to_xml ());
+		}
+		
 		return node;
 	}
 }

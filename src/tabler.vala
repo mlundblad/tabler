@@ -67,6 +67,7 @@ public class Main : Object
 		                                  Tabler.LongTable.Orientation.HORIZONTAL,
 		                                  new Tabler.LongTable.Setting ());
     
+		arrangement.add_guest (new Tabler.Guest ("Foo Bar", Tabler.Gender.MALE));
 		arrangement.add_room (room);
 		room.add_table (table, 2, 2);
 
