@@ -66,10 +66,12 @@ public class Main : Object
 		var table = new Tabler.LongTable (10,
 		                                  Tabler.LongTable.Orientation.HORIZONTAL,
 		                                  new Tabler.LongTable.Setting ());
-    
-		arrangement.add_guest (new Tabler.Guest ("Foo Bar", Tabler.Gender.MALE));
+		var guest = new Tabler.Guest ("Foo Bar", Tabler.Gender.MALE);
+		
+		arrangement.add_guest (guest);
 		arrangement.add_room (room);
 		room.add_table (table, 2, 2);
+		table.insert_guest (guest, 7);
 
 		try {
 			Tabler.save_to_file (arrangement, "test.tabler");

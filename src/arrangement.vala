@@ -52,6 +52,12 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 		foreach (var guest in guests.values) {
 			guests_node->add_child (guest.to_xml ());
 		}
+
+		Xml.Node* rooms_node = node->new_child (null, "rooms");
+
+		foreach (var room in rooms) {
+			rooms_node->add_child (room.to_xml ());
+		}
 		
 		return node;
 	}

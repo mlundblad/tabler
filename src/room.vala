@@ -19,7 +19,7 @@ tabler is free software: you can redistribute it and/or modify it
 
 using Gee;
 
-public class Tabler.Room : GLib.Object {
+public class Tabler.Room : GLib.Object, Tabler.XmlSerializable {
 
 	public class TableSlot {
 		public Table table { get; set; }
@@ -54,6 +54,8 @@ public class Tabler.Room : GLib.Object {
 		if (occupied_slots == null) {
 			// if this is called the first time, create the occupation array
 			occupied_slots = new bool[width, height];
+			this.width = width;
+			this.height = height;
 			return true;
 		}
 
@@ -85,6 +87,8 @@ public class Tabler.Room : GLib.Object {
 			}
 		}
 		occupied_slots = occ_temp;
+		this.width = width;
+		this.height = height;
 		
 		return true;
 	}
@@ -126,6 +130,7 @@ public class Tabler.Room : GLib.Object {
 
 			return true;
 		} else {
+			stderr.printf ("Failed to place table at (%u, %u)\n", x, y);
 			return false;
 		}
 	}
@@ -152,5 +157,22 @@ public class Tabler.Room : GLib.Object {
 		}
 
 		return false;
+	}
+
+	public Xml.Node* to_xml () {
+		Xml.Node* node = new Xml.Node (null, "room");
+
+		if (name != null && name.length > 0) {
+			node->new_prop ("name", name);
+		}
+
+		foreach (var slot in tables) {
+			Xml.Node* table_node = slot.table.to_xml ();
+			table_node->new_prop ("x", slot.x.to_string ());
+			table_node->new_prop ("y", slot.y.to_string ());
+			node->add_child (table_node);
+		}
+
+		return node;
 	}
 }
