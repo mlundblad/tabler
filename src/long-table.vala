@@ -26,7 +26,7 @@ public class Tabler.LongTable : Tabler.Table, Tabler.XmlSerializable {
 		VERTICAL
 	}
 
-	public class Setting : GLib.Object {
+	public class Setting : GLib.Object, XmlSerializable {
 		// true if "up" long-side for a horizontal, or "left" side for a verical
 		// table is set up for seating
 		public bool up { get; construct; }
@@ -43,7 +43,18 @@ public class Tabler.LongTable : Tabler.Table, Tabler.XmlSerializable {
 		public Setting (bool up = true, bool down = true,
 		                bool left = false, bool right = false) {
 			Object (up: up, down: down, left: left, right: right);
-		}	
+		}
+
+		public Xml.Node* to_xml () {
+			Xml.Node* node = new Xml.Node(null, "setting");
+
+			node->new_prop ("up", up.to_string ());
+			node->new_prop ("down", down.to_string ());
+			node->new_prop ("left", left.to_string ());
+			node->new_prop ("right", right.to_string ());
+
+			return node;
+		}
 	}
 	
 	public Orientation orientation { get; private set; }
@@ -81,6 +92,11 @@ public class Tabler.LongTable : Tabler.Table, Tabler.XmlSerializable {
 		Xml.Node* node = base.to_xml ();
 
 		node->new_prop ("type", "long");
+		node->new_prop ("orientation",
+		                orientation == Orientation.HORIZONTAL ?
+		                "horizontal" : "vertical");
+		node->add_child (setting.to_xml ());
+
 		return node;
 	}
 }
