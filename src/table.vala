@@ -20,8 +20,8 @@ tabler is free software: you can redistribute it and/or modify it
 using Xml;
 
 public abstract class Tabler.Table : GLib.Object, Tabler.XmlSerializable {
-	protected uint capacity { get; private set; }
-	protected string name { get; set; }
+	public uint capacity { get; private set; }
+	public string name { get; set; }
 	protected Guest[] guests;
 
 	public class Iterator {

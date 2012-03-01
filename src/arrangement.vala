@@ -21,8 +21,8 @@ using Gee;
 
 public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 
-	private Gee.HashMap<string, Guest> guests { get; private set; }
-	private Gee.List<Room> rooms { get; private set; }
+	public Gee.HashMap<string, Guest> guests { get; private set; }
+	public Gee.List<Room> rooms { get; private set; }
 
 	public string name { get; set; }
 	
