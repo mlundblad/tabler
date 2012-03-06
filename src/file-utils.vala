@@ -49,5 +49,27 @@ namespace Tabler {
 			//TODO: throw an error
 		}
 	}
+
+	public Arrangement? load_from_file (string filename) {
+		Xml.Doc* doc = Xml.Parser.parse_file (filename);
+		if (doc == null) {
+			stderr.printf ("File does not exist, or could not be accessed: %s\n",
+			               filename);
+			return null;
+		}
+
+		Xml.Node* root = doc->get_root_element ();
+		if (root == null) {
+			stderr.printf ("File is empty: %s\n", filename);
+			delete doc;
+			return null;
+		}
+
+		var parser = new ArrangementParser ();
+		var arrangement = parser.create_from_xml (root);
+
+		delete doc;
+		return arrangement;
+	}
 		
 }

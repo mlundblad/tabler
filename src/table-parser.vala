@@ -36,7 +36,8 @@ public class Tabler.TableParser : GLib.Object {
 				table = parser.create_from_xml (node);
 				break;
 			case "round":
-
+				var parser = new RoundTableParser ();
+				table = parser.create_from_xml (node);
 				break;
 			default:
 				stderr.printf ("Unknow table type: %s\n", type);
