@@ -162,6 +162,9 @@ public class Tabler.Room : GLib.Object, Tabler.XmlSerializable {
 	public Xml.Node* to_xml () {
 		Xml.Node* node = new Xml.Node (null, "room");
 
+		node->new_prop ("width", width.to_string ());
+		node->new_prop ("height", height.to_string ());
+		
 		if (name != null && name.length > 0) {
 			node->new_prop ("name", name);
 		}
