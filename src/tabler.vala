@@ -60,25 +60,17 @@ public class Main : Object
 		Gtk.init (ref args);
 		var app = new Main ();
 
-		// test code...
-		var arrangement = new Tabler.Arrangement ();
-		var room = new Tabler.Room (32, 32);
-		var table = new Tabler.LongTable (10,
-		                                  Tabler.LongTable.Orientation.HORIZONTAL,
-		                                  new Tabler.LongTable.Setting ());
-		var guest = new Tabler.Guest ("Foo Bar", Tabler.Gender.MALE);
-		
-		arrangement.add_guest (guest);
-		arrangement.add_room (room);
-		room.add_table (table, 2, 2);
-		table.insert_guest (guest, 7);
+		if (args.length >= 2) {
+			var filename = args[1];
+			var arrangement = Tabler.load_from_file (filename);
 
-		try {
-			Tabler.save_to_file (arrangement, "test.tabler");
-		} catch (Error e) {
-			stderr.printf ("Failed to save file: %s\n", e.message);
+			try {
+				Tabler.save_to_file (arrangement, "test.tabler");
+			} catch (Error e) {
+				stderr.printf ("Failed to save file: %s\n", e.message);
+			}
 		}
-			
+
 		Gtk.main ();
 		
 		return 0;
