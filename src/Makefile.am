@@ -3,9 +3,6 @@
 ## Created by Anjuta
 
 
-uidir = $(datadir)/tabler/ui
-ui_DATA = tabler.ui
-
 
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
