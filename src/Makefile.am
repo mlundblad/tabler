@@ -20,7 +20,7 @@ AM_CFLAGS =\
 bin_PROGRAMS = tabler
 
 tabler_SOURCES = \
-	tabler.vala config.vapi table.vala guest.vala room.vala round-table.vala long-table.vala gender.vala xml-serializable.vala arrangement.vala file-utils.vala arrangement-parser.vala room-parser.vala guest-parser.vala table-parser.vala long-table-parser.vala round-table-parser.vala
+	tabler.vala config.vapi table.vala guest.vala room.vala round-table.vala long-table.vala gender.vala xml-serializable.vala arrangement.vala file-utils.vala arrangement-parser.vala room-parser.vala guest-parser.vala table-parser.vala long-table-parser.vala round-table-parser.vala main-window.vala
 
 tabler_VALAFLAGS =  \
 	--pkg gtk+-3.0 --pkg gee-1.0 --pkg libxml-2.0 --pkg gio-2.0
