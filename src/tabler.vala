@@ -37,17 +37,26 @@ public class Main : Object
 
 	static int main (string[] args) 
 	{
+		Intl.bindtextdomain (Config.GETTEXT_PACKAGE, Config.PACKAGE_LOCALE_DIR);
+		Intl.bind_textdomain_codeset (Config.GETTEXT_PACKAGE, "UTF-8");
+		Intl.textdomain (Config.GETTEXT_PACKAGE);
+		
 		Gtk.init (ref args);
+
 		var app = new Main ();
 
 		if (args.length >= 2) {
 			var filename = args[1];
 			var arrangement = Tabler.load_from_file (filename);
 
+			if (arrangement == null) {
+				stderr.printf (_("Failed to load file: %s\n"), filename);
+			}
+			
 			try {
 				Tabler.save_to_file (arrangement, "test.tabler");
 			} catch (Error e) {
-				stderr.printf ("Failed to save file: %s\n", e.message);
+				stderr.printf (_("Failed to save file: %s\n"), e.message);
 			}
 		}
 

@@ -7,6 +7,7 @@ config.h*
 config.log
 config.status
 config.sub
+config.rpath
 configure
 depcomp
 INSTALL
@@ -18,3 +19,12 @@ Makefile.in
 missing
 stamp-h1
 *.anjuta
+/po/*.gmo
+/po/*.mo
+/po/.intltool-merge-cache
+/po/Makefile
+/po/Makefile.in
+/po/Makefile.in.in
+/po/POTFILES
+/po/tabler.pot
+/po/stamp-it

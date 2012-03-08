@@ -1,0 +1,28 @@
+# Swedish translations for tabler package.
+# Copyright (C) 2012 THE tabler'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the tabler package.
+# Marcus Lundblad <ml@update.uu.se>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: tabler 0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-03-08 23:44+0100\n"
+"PO-Revision-Date: 2012-03-08 23:44+0100\n"
+"Last-Translator: Marcus Lundblad <ml@update.uu.se>\n"
+"Language-Team: Swedish\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ASCII\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/tabler.vala:53
+#, c-format
+msgid "Failed to load file: %s\n"
+msgstr "Misslyckades att ladda fil: %s\n"
+
+#: src/tabler.vala:59
+#, c-format
+msgid "Failed to save file: %s\n"
+msgstr "Misslyckades med att spara fil: %s\n"

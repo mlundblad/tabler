@@ -8,6 +8,7 @@ AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
 	-DPACKAGE_DATA_DIR=\""$(datadir)"\" \
+	-DGETTEXT_PACKAGE=\"tabler\" \
 	$(TABLER_CFLAGS)
 
 AM_CFLAGS =\
