@@ -3,7 +3,9 @@
 ## Created by Anjuta
 
 
-
+# needed to add GETTEXT_PACKAGE here (even though it goes into config.h) to
+# make the compiler happy... not sure why, it doesn't seem to be needed in
+# other packages I've looked at...
 AM_CPPFLAGS = \
 	-DPACKAGE_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" \
 	-DPACKAGE_SRC_DIR=\""$(srcdir)"\" \
