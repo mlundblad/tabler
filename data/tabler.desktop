@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Tabler
+Comment=Seating Arrangement Application
+TryExec=tabler
+Exec=tabler %U
+Icon=tabler
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=Utilities
+
+# TODO: add mime type
+
+Keywords=Seating;Planning
+
+
