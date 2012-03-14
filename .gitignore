@@ -19,6 +19,8 @@ Makefile.in
 missing
 stamp-h1
 *.anjuta
+/data/*.desktop
+/data/*.desktop.in
 /po/*.gmo
 /po/*.mo
 /po/.intltool-merge-cache
