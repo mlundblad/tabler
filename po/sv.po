@@ -7,22 +7,34 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabler 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-08 23:44+0100\n"
+"POT-Creation-Date: 2012-03-14 22:46+0100\n"
 "PO-Revision-Date: 2012-03-08 23:44+0100\n"
 "Last-Translator: Marcus Lundblad <ml@update.uu.se>\n"
 "Language-Team: Swedish\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ASCII\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/tabler.vala:53
+#: ../data/tabler.desktop.in.in.h:1
+msgid "Tabler"
+msgstr "Tabler"
+
+#: ../data/tabler.desktop.in.in.h:2
+msgid "Seating Arrangement Application"
+msgstr "Program för sittningsarrangemang"
+
+#: ../data/tabler.desktop.in.in.h:3
+msgid "Seating;Planning"
+msgstr "Sittningar;Planering"
+
+#: ../src/tabler.vala:53
 #, c-format
 msgid "Failed to load file: %s\n"
 msgstr "Misslyckades att ladda fil: %s\n"
 
-#: src/tabler.vala:59
+#: ../src/tabler.vala:59
 #, c-format
 msgid "Failed to save file: %s\n"
 msgstr "Misslyckades med att spara fil: %s\n"
