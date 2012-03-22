@@ -22,13 +22,15 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 	public string name { get; set; }
 	public Gender gender { get; set; }
 	public bool vip { get; set; }
+	public bool rsvp { get; set; }
 	
     // Constructor
     public Guest (string name, Gender gender = Gender.UNKNOWN,
-                  bool vip = false) {
+                  bool vip = false, bool rsvp = false) {
         this.name = name;
 		this.gender = gender;
 		this.vip = vip;
+		this.rsvp = rsvp;
     }
 
 	public Xml.Node* to_xml () {
@@ -38,7 +40,8 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 		node->new_prop ("gender",
 		                gender == Gender.MALE ? "male" :
 			            gender == Gender.FEMALE ? "female" : "unknown");
-		node->new_prop ("vip", vip ? "true" : "false");
+		node->new_prop ("vip", vip.to_string ());
+		node->new_prop ("rsvp", rsvp.to_string ());
 
 		return node;
 	}
