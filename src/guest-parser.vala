@@ -23,6 +23,7 @@ public class Tabler.GuestParser : GLib.Object {
 		requires (node->name == "guest") {
 		var name = node->get_prop ("name");
 		var gender = node->get_prop ("gender");
+		var vip = node->get_prop ("vip");
 
 		if (name == null) {
 			stderr.printf ("A guest must have a name set\n");
@@ -32,6 +33,6 @@ public class Tabler.GuestParser : GLib.Object {
 		return new Guest (name, gender == null ? Gender.UNKNOWN :
 			                  gender == "male" ? Gender.MALE :
 			                  gender == "female" ? Gender.FEMALE :
-			                  Gender.UNKNOWN);
+			                  Gender.UNKNOWN, bool.parse (vip));
 	}
 }
