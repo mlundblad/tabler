@@ -30,9 +30,9 @@ public class Tabler.Relation : GLib.Object {
 	public Guest from { get; set; }
 	public Type type { get; set; }
 	
-    // Constructor
-    public Relation (Guest from, Guest to, Type type) {
-        this.from = from;
+	// Constructor
+	public Relation (Guest from, Guest to, Type type) {
+		this.from = from;
 		this.to = to;
 		this.type = type;
     }
