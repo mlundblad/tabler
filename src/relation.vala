@@ -31,7 +31,8 @@ public class Tabler.Relation : GLib.Object {
 	public Type relation_type { get; set; }
 	
 	// Constructor
-	public Relation (Guest from, Guest to, Type type) {
+	public Relation (Guest from, Guest to, Type type)
+		requires (from != to) {
 		this.from = from;
 		this.to = to;
 		this.relation_type = type;
