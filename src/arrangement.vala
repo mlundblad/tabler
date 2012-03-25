@@ -24,6 +24,8 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 	public Gee.HashMap<string, Guest> guests { get; private set; }
 	public Gee.List<Room> rooms { get; private set; }
 
+	private Gee.HashMap<Guest, Gee.HashMap<Guest, Relation>> relations;
+
 	public string name { get; set; }
 	
 	public Arrangement () {
@@ -38,6 +40,34 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 	public void add_room (Room room) {
 		rooms.add (room);
 	}
+
+	public Relation? find_relation (Guest from, Guest to) {
+		Relation? relation = null;
+		var map = relations.get (from);
+
+		if (map != null) {
+			relation = map.get (to);
+		}
+
+		return relation;
+	}
+
+	public void update_relation (Guest from, Guest to, Relation.Type type) {
+		var relation = find_relation (from, to);
+
+		if (relation != null) {
+			relation.relation_type = type;
+		} else {
+			var map = relations.get (from);
+
+			if (map == null) {
+				relations.set (from, new Gee.HashMap<Guest, Relation> ());
+				map = relations.get (from);
+			}
+
+			map.set (to, new Relation (from, to, type));
+		}
+	}                                                         
 
 	public Xml.Node* to_xml () {
 		//TODO: generate real XML here...
