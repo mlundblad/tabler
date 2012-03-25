@@ -28,13 +28,13 @@ public class Tabler.Relation : GLib.Object {
 
 	public Guest to { get; set; }
 	public Guest from { get; set; }
-	public Type type { get; set; }
+	public Type relation_type { get; set; }
 	
 	// Constructor
 	public Relation (Guest from, Guest to, Type type) {
 		this.from = from;
 		this.to = to;
-		this.type = type;
+		this.relation_type = type;
     }
 
 }
