@@ -19,6 +19,9 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 
+	private static uint next_id = 1;
+	
+	public uint id { get; private set; }
 	public string name { get; set; }
 	public Gender gender { get; set; }
 	public bool vip { get; set; }
@@ -27,15 +30,20 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
     // Constructor
     public Guest (string name, Gender gender = Gender.UNKNOWN,
                   bool vip = false, bool rsvp = false) {
-        this.name = name;
-		this.gender = gender;
-		this.vip = vip;
-		this.rsvp = rsvp;
+		Object (id: next_id, name: name, gender: gender, vip: vip, rsvp: rsvp);
+		next_id++;
     }
+
+	public Guest.with_id (uint id, string name, Gender gender = Gender.UNKNOWN,
+	                      bool vip = false, bool rsvp = false) {
+		Object (id: id, name: name, gender: gender, vip: vip, rsvp: rsvp);
+		next_id++;
+	}
 
 	public Xml.Node* to_xml () {
 		Xml.Node* node = new Xml.Node (null, "guest");
-	
+
+		node->new_prop ("id", id.to_string ());
 		node->new_prop ("name", name);
 		node->new_prop ("gender",
 		                gender == Gender.MALE ? "male" :

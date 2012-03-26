@@ -21,20 +21,26 @@ public class Tabler.GuestParser : GLib.Object {
 
     public Guest? create_from_xml (Xml.Node* node)
 		requires (node->name == "guest") {
+		var id = node->get_prop ("id");
 		var name = node->get_prop ("name");
 		var gender = node->get_prop ("gender");
 		var vip = node->get_prop ("vip");
 		var rsvp = node->get_prop ("rsvp");
 
+		if (id == null) {
+			stderr.printf ("A guest must have an ID set\n");
+			return null;
+		}
 		if (name == null) {
 			stderr.printf ("A guest must have a name set\n");
 			return null;
 		}
 
-		return new Guest (name, gender == null ? Gender.UNKNOWN :
-			                  gender == "male" ? Gender.MALE :
-			                  gender == "female" ? Gender.FEMALE :
-			                  Gender.UNKNOWN,
-			              bool.parse (vip), bool.parse (rsvp));
+		return new Guest.with_id (int.parse (id),
+		                          name, gender == null ? Gender.UNKNOWN :
+			              		  gender == "male" ? Gender.MALE :
+			              	      gender == "female" ? Gender.FEMALE :
+			                      Gender.UNKNOWN,
+			          			  bool.parse (vip), bool.parse (rsvp));
 	}
 }
