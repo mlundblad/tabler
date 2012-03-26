@@ -26,6 +26,8 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 	public Gender gender { get; set; }
 	public bool vip { get; set; }
 	public bool rsvp { get; set; }
+	private Gee.HashMap<Guest, Relation> relations =
+		new Gee.HashMap<Guest, Relation> ();
 	
     // Constructor
     public Guest (string name, Gender gender = Gender.UNKNOWN,
@@ -38,6 +40,14 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 	                      bool vip = false, bool rsvp = false) {
 		Object (id: id, name: name, gender: gender, vip: vip, rsvp: rsvp);
 		next_id++;
+	}
+
+	public void set_relation_to (Guest to, Relation relation) {
+		relations.set (to, relation);
+	}
+
+	public Relation? get_relation_to (Guest to) {
+		return relations.get (to);
 	}
 
 	public Xml.Node* to_xml () {

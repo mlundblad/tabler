@@ -24,8 +24,6 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 	public Gee.HashMap<string, Guest> guests { get; private set; }
 	public Gee.List<Room> rooms { get; private set; }
 
-	private Gee.HashMap<Guest, Gee.HashMap<Guest, Relation>> relations;
-
 	public string name { get; set; }
 	
 	public Arrangement () {
@@ -42,25 +40,11 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 	}
 
 	public Relation? find_relation (Guest from, Guest to) {
-		Relation? relation = null;
-		var map = relations.get (from);
-
-		if (map != null) {
-			relation = map.get (to);
-		}
-
-		return relation;
+		return from.get_relation_to (to);
 	}
 
 	public void update_relation (Guest from, Guest to, Relation relation) {
-		var map = relations.get (from);
-
-		if (map == null) {
-			relations.set (from, new Gee.HashMap<Guest, Relation> ());
-			map = relations.get (from);
-		}
-
-		map.set (to, relation);
+		from.set_relation_to (to, relation);
 	}                                                         
 
 	public Xml.Node* to_xml () {
