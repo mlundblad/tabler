@@ -52,21 +52,15 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 		return relation;
 	}
 
-	public void update_relation (Guest from, Guest to, Relation.Type type) {
-		var relation = find_relation (from, to);
+	public void update_relation (Guest from, Guest to, Relation relation) {
+		var map = relations.get (from);
 
-		if (relation != null) {
-			relation.relation_type = type;
-		} else {
-			var map = relations.get (from);
-
-			if (map == null) {
-				relations.set (from, new Gee.HashMap<Guest, Relation> ());
-				map = relations.get (from);
-			}
-
-			map.set (to, new Relation (from, to, type));
+		if (map == null) {
+			relations.set (from, new Gee.HashMap<Guest, Relation> ());
+			map = relations.get (from);
 		}
+
+		map.set (to, relation);
 	}                                                         
 
 	public Xml.Node* to_xml () {

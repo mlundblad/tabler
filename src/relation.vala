@@ -17,25 +17,10 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Tabler.Relation : GLib.Object {
-
-	public enum Type {
-		NEXT_TO,
-		NEAR_TO,
-		NOT_NEXT_TO,
-		NOT_NEAR_TO
-	}
-
-	public Guest to { get; set; }
-	public Guest from { get; set; }
-	public Type relation_type { get; set; }
-	
-	// Constructor
-	public Relation (Guest from, Guest to, Type type)
-		requires (from != to) {
-		this.from = from;
-		this.to = to;
-		this.relation_type = type;
-    }
-
+public enum Tabler.Relation {
+	NEXT_TO,
+	NEAR_TO,
+	NOT_NEXT_TO,
+	NOT_NEAR_TO
 }
+
