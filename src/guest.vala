@@ -29,8 +29,8 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 	private Gee.HashMap<Guest, Relation> relations =
 		new Gee.HashMap<Guest, Relation> ();
 
-	private static Gee.HashMap<uint, Guest> guest_map =
-		new Gee.HashMap<uint, Guest> ();
+	private static Gee.HashMap<uint, weak Guest> guest_map =
+		new Gee.HashMap<uint, weak Guest> ();
 
 	public static Guest? find_by_id (uint id) {
 		return guest_map.get (id);
