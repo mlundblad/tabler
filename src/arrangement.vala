@@ -45,8 +45,12 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 
 	public void update_relation (Guest from, Guest to, Relation relation) {
 		from.set_relation_to (to, relation);
-	}                                                         
+	}
 
+	public void remove_relation (Guest from, Guest to) {
+		from.remove_relation_to (to);
+	}
+	
 	public Xml.Node* to_xml () {
 		//TODO: generate real XML here...
 		Xml.Node* node = new Xml.Node (null, "arrangement");

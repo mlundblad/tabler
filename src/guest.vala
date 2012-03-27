@@ -28,25 +28,48 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 	public bool rsvp { get; set; }
 	private Gee.HashMap<Guest, Relation> relations =
 		new Gee.HashMap<Guest, Relation> ();
+
+	private static Gee.HashMap<uint, Guest> guest_map =
+		new Gee.HashMap<uint, Guest> ();
+
+	public static Guest? find_by_id (uint id) {
+		return guest_map.get (id);
+	}
 	
     // Constructor
     public Guest (string name, Gender gender = Gender.UNKNOWN,
                   bool vip = false, bool rsvp = false) {
 		Object (id: next_id, name: name, gender: gender, vip: vip, rsvp: rsvp);
+		guest_map.set (next_id, this);
 		next_id++;
     }
 
 	public Guest.with_id (uint id, string name, Gender gender = Gender.UNKNOWN,
 	                      bool vip = false, bool rsvp = false) {
 		Object (id: id, name: name, gender: gender, vip: vip, rsvp: rsvp);
-		next_id++;
+		guest_map.set (id, this);
+		if (id > next_id) {
+			next_id = id + 1;
+		}
+	}
+
+	~Guest () {
+		guest_map.unset (this.id);
 	}
 
 	public void set_relation_to (Guest to, Relation relation) {
 		relations.set (to, relation);
 	}
 
-	public Relation? get_relation_to (Guest to) {
+	public void remove_relation_to (Guest to) {
+		relations.unset (to);
+	}
+
+	public bool has_relation_to (Guest to) {
+		return relations.has_key (to);
+	}
+	
+	public Relation get_relation_to (Guest to) {
 		return relations.get (to);
 	}
 
