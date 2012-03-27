@@ -70,7 +70,7 @@ public abstract class Tabler.Table : GLib.Object, Tabler.XmlSerializable {
 			if (guest != null) {
 				Xml.Node* guest_node = node->new_child (null, "guest");
 
-				guest_node->new_prop ("name", guest.name);
+				guest_node->new_prop ("id", guest.id.to_string ());
 				guest_node->new_prop ("position", position.to_string ());
 			}
 			position++;

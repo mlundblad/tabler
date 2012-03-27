@@ -105,7 +105,7 @@ public class Tabler.ArrangementParser : GLib.Object {
 					continue;
 				}
 
-				var room = room_parser.create_from_xml (iter, arrangement);
+				var room = room_parser.create_from_xml (iter);
 
 				if (room != null) {
 					arrangement.add_room (room);

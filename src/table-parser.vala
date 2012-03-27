@@ -19,7 +19,7 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.TableParser : GLib.Object {
 
-	public Table? create_from_xml (Xml.Node* node, Arrangement arrangement)
+	public Table? create_from_xml (Xml.Node* node)
 		requires (node->name == "table") {
 		var type = node->get_prop ("type");
 
@@ -58,16 +58,16 @@ public class Tabler.TableParser : GLib.Object {
 				}
 
 				if (iter->name == "guest") {
-					name = iter->get_prop ("name");
-					if (name == null) {
-						stderr.printf ("<guest/> node must have \"name\" attribute\n");
+					var id = iter->get_prop ("id");
+					if (id == null) {
+						stderr.printf ("<guest/> node must have an \"id\" attribute\n");
 						continue;
 					}
 
-					var guest = arrangement.guests.get (name);
+					var guest = Guest.find_by_id (int.parse (id));
 					if (guest == null) {
-						stderr.printf ("Guest with name %s not defined in arrangement\n",
-						               name);
+						stderr.printf ("Guest with id %s not defined in arrangement\n",
+						               id);
 						continue;
 					}
 

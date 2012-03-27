@@ -19,7 +19,7 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.RoomParser : GLib.Object {
 
-	public Room? create_from_xml (Xml.Node* node, Arrangement arrangement)
+	public Room? create_from_xml (Xml.Node* node)
 		requires (node->name == "room") {
 		var w = node->get_prop ("width");
 		var h = node->get_prop ("height");
@@ -54,7 +54,7 @@ public class Tabler.RoomParser : GLib.Object {
 			}
 
 			var parser = new TableParser ();
-			var table = parser.create_from_xml (iter, arrangement);
+			var table = parser.create_from_xml (iter);
 			var x = iter->get_prop ("x");
 			var y = iter->get_prop ("y");
 			
