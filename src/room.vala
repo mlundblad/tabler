@@ -102,12 +102,35 @@ public class Tabler.Room : GLib.Object, Tabler.XmlSerializable {
 		if (x + tw > width || y + th > height) {
 			return false;
 		}
+
+		// get outline of current table
+		uint tx1 = 0, tx2 = 0, ty1 = 0, ty2 = 0; // these values will always have
+												 // been initialized if the
+		                                         // condition below is executed
+		bool existing = false;
+
+		foreach (var ts in tables) {
+			if (ts.table == table) {
+				uint width;
+				uint height;
+				ts.table.get_extents (out width, out height);
+				tx1 = ts.x;
+				ty1 = ts.y;
+				tx2 = tx1 + width;
+				ty2 = ty1 + height;
+				existing = true;
+				break;
+			}
+		}
 		
 		// check needed slots
 		for (uint x1 = x ; x1 < x + tw ; x1++) {
 			for (uint y1 = y ; y1 < y + th ; y1++) {
 				if (is_occupied (x1, y1)) {
-					return false;
+					if (!existing ||
+					    !((x1 >= tx1 && x1 <= tx2) && (y1 >= ty1 && y1 <= ty2))) {
+						return false;
+					}
 				}
 			}
 		}
