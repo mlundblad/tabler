@@ -7,7 +7,7 @@ Icon=tabler
 StartupNotify=true
 Terminal=false
 Type=Application
-Categories=Utilities
+Categories=Utility;
 
 # TODO: add mime type
 
