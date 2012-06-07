@@ -84,6 +84,21 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 		node->new_prop ("vip", vip.to_string ());
 		node->new_prop ("rsvp", rsvp.to_string ());
 
+		// add node for relations
+		Xml.Node* relations_node = node->add_child ("relations");
+
+		foreach (var guest in guest_map.values) {
+			if (has_relation_to (guest)) {
+				Xml.Node* relation_node = relations_node->add_child ("relation");
+				var relation = get_relation_to (guest);
+
+				relation_node->new_prop ("type", relation == Relation.NEXT_TO ?
+				                         "next_to" : relation == Relation.NEAR_TO ?
+				                     	 "near_to" : relation == Relation.NOT_NEXT_TO ?
+				                         "not_next_to" : "not_near_to");
+			}
+		}
+		
 		return node;
 	}
 }
