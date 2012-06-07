@@ -87,8 +87,69 @@ public class Tabler.ArrangementParser : GLib.Object {
 					arrangement.add_guest (guest);
 				}
 			}
+
+			// loop over the guests once again to set up the relations
+			// (we need to fully parse the guests first to be able to do the
+			//  ID lookup)
+			for (Xml.Node* iter = guests_node->children ; iter != null ;
+			     iter = iter->next) {
+				if (iter->type != Xml.ElementType.ELEMENT_NODE) {
+					continue;
+				}
+
+				if (iter->name == "guest") {
+					for (Xml.Node* iter2 = iter->children ; iter2 != null ;
+					     iter2 = iter2->next) {
+						if (iter2->type != Xml.ElementType.ELEMENT_NODE) {
+							continue;
+						}
+
+						var guest = Guest.find_by_id (int.parse (iter->get_prop ("id")));
+
+						if (iter2->name != "relations") {
+							stderr.printf ("Unexpected tag: %s in the <guest/> tag\n",
+							               iter2->name);
+							continue;
+						}
+
+						for (Xml.Node* iter3 = iter2->children ; iter3 != null ;
+						     iter3 = iter3->next) {
+							if (iter3->type != Xml.ElementType.ELEMENT_NODE) {
+								continue;
+							}
+
+							if (iter3->name != "relation") {
+								stderr.printf ("Unexpected tag: %s in the <relations/> tag\n",
+								               iter3->name);
+								continue;
+							}
+
+							var to = Guest.find_by_id (int.parse (iter3->get_prop ("to")));
+							                           
+							switch (iter3->get_prop ("type")) {
+								case "next_to":
+									guest.set_relation_to (to, Relation.NEXT_TO);
+									break;
+								case "near_to":
+									guest.set_relation_to (to, Relation.NEAR_TO);
+									break;
+								case "not_next_to":
+									guest.set_relation_to (to, Relation.NOT_NEXT_TO);
+									break;
+								case "not_near_to":
+									guest.set_relation_to (to, Relation.NOT_NEAR_TO);
+									break;
+								default:
+									stderr.printf ("Unknown relation type: %s\n",
+									               iter3->get_prop ("type"));
+									break;
+							}
+						}
+					}
+				}
+			}
 		}
-		
+			
 		// loop over the child nodes of the <rooms/> node
 		if (rooms_node != null) {
 			var room_parser = new RoomParser (); 
