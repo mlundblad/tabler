@@ -1,2 +1,5 @@
 data/tabler.desktop.in.in
 src/tabler.vala
+src/application.vala
+src/main-window.vala
+[type: gettext/glade]src/appmenu.ui
