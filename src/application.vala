@@ -17,22 +17,19 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Tabler.MainWindow : Gtk.ApplicationWindow {
+public class Tabler.Application : Gtk.Application {
 
-	static const int DEFAULT_WIDTH = 800;
-	static const int DEFAULT_HEIGHT = 600;
+	private MainWindow window;
+	private Arrangement arrangement;
 	
     // Constructor
-    public MainWindow (Gtk.Application app) {
-		Object (application: app);
-		// TODO: add localization support...
-		title = "Tabler";
-		window_position = Gtk.WindowPosition.CENTER;
-		set_default_size (DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		hide_titlebar_when_maximized = true;
-		
-		// TODO: actually do something real here, like asking to save, etc.
-		destroy.connect (Gtk.main_quit);
+    public Application () {
     }
 
+	public override void activate () {
+		if (window == null) {
+			window = new MainWindow (this);
+		}
+		window.show ();
+	}
 }
