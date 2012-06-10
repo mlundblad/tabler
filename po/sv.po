@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabler 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-14 22:46+0100\n"
+"POT-Creation-Date: 2012-06-10 23:44+0200\n"
 "PO-Revision-Date: 2012-03-08 23:44+0100\n"
 "Last-Translator: Marcus Lundblad <ml@update.uu.se>\n"
 "Language-Team: Swedish\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/tabler.desktop.in.in.h:1
+#: ../data/tabler.desktop.in.in.h:1 ../src/application.vala:44
 msgid "Tabler"
 msgstr "Tabler"
 
@@ -29,12 +29,30 @@ msgstr "Program för sittningsarrangemang"
 msgid "Seating;Planning"
 msgstr "Sittningar;Planering"
 
-#: ../src/tabler.vala:53
-#, c-format
-msgid "Failed to load file: %s\n"
-msgstr "Misslyckades att ladda fil: %s\n"
+#: ../src/application.vala:43
+msgid "translator-credits"
+msgstr ""
 
-#: ../src/tabler.vala:59
-#, c-format
-msgid "Failed to save file: %s\n"
-msgstr "Misslyckades med att spara fil: %s\n"
+#: ../src/application.vala:45
+#, fuzzy
+msgid "About Tabler"
+msgstr "Om Tabler"
+
+#: ../src/application.vala:46
+#, fuzzy
+msgid "Tabler Seating Planning Program"
+msgstr "Table, ett program för att planera sittningar"
+
+#: ../src/appmenu.ui.h:1
+msgid "_About"
+msgstr "_Om"
+
+#: ../src/appmenu.ui.h:2
+msgid "_Quit"
+msgstr "_Avsluta"
+
+#~ msgid "Failed to load file: %s\n"
+#~ msgstr "Misslyckades att ladda fil: %s\n"
+
+#~ msgid "Failed to save file: %s\n"
+#~ msgstr "Misslyckades med att spara fil: %s\n"
