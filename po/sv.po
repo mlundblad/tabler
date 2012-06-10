@@ -41,7 +41,7 @@ msgstr "Om Tabler"
 #: ../src/application.vala:46
 #, fuzzy
 msgid "Tabler Seating Planning Program"
-msgstr "Table, ett program för att planera sittningar"
+msgstr "Tabler, ett program för att planera sittningar"
 
 #: ../src/appmenu.ui.h:1
 msgid "_About"
