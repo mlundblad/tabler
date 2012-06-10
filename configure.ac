@@ -30,6 +30,17 @@ AM_PROG_VALAC([0.10.0])
 
 PKG_CHECK_MODULES(TABLER, [gtk+-3.0 >= 3.4.0 gee-1.0 libxml-2.0 gio-2.0])
 
+AC_ARG_VAR([GLIB_COMPILE_RESOURCES],[the glib-compile-resources programme])
+AC_PATH_PROG([GLIB_COMPILE_RESOURCES],[glib-compile-resources],[])
+if test -z "$GLIB_COMPILE_RESOURCES"; then
+  AC_MSG_ERROR([glib-compile-resources not found])
+fi
+
+AC_ARG_VAR([XMLLINT],[the xmllint programme])
+AC_PATH_PROG([XMLLINT],[xmllint],[])
+if test -z "$XMLLINT"; then
+  AC_MSG_ERROR([xmllint not found])
+fi
 
 AC_OUTPUT([
 Makefile

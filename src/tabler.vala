@@ -26,8 +26,9 @@ public class Main : Object
 	{
 		try 
 		{
-			var window = new Tabler.MainWindow ();
-			window.show_all ();
+			//var app = new Tabler.Application ();
+			//var window = new Tabler.MainWindow (app);
+			//window.show_all ();
 		} 
 		catch (Error e) {
 			stderr.printf ("Could not load UI: %s\n", e.message);
@@ -43,8 +44,14 @@ public class Main : Object
 		
 		Gtk.init (ref args);
 
-		var app = new Main ();
+		var app = new Tabler.Application ();
 
+		app.run (args);
+		app = null;
+
+		return 0;
+
+		/* TODO: move command line handling to the application class
 		if (args.length >= 2) {
 			var filename = args[1];
 			var arrangement = Tabler.load_from_file (filename);
@@ -63,5 +70,6 @@ public class Main : Object
 		Gtk.main ();
 		
 		return 0;
+		*/
 	}
 }

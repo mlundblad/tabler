@@ -19,6 +19,14 @@ AM_CFLAGS =\
 
 bin_PROGRAMS = tabler
 
+BUILT_SOURCES = \
+	tabler-resources.c \
+	tabler-resources.h
+
+tabler-resources.h tabler-resources.c: tabler.gresource.xml Makefile $(shell $(GLIB_COMPILE_RESOURCES) --generate-dependencies --sourcedir $(srcdir) $(srcdir)/tabler.gresource.xml)
+	$(AM_V_GEN) XMLLINT=$(XMLLINT) $(GLIB_COMPILE_RESOURCES) --target $@ --sourcedir $(srcdir) --generate --c-name tabler $<
+
+
 tabler_SOURCES = \
 	tabler.vala config.vapi table.vala guest.vala room.vala round-table.vala long-table.vala gender.vala xml-serializable.vala arrangement.vala file-utils.vala arrangement-parser.vala room-parser.vala guest-parser.vala table-parser.vala long-table-parser.vala round-table-parser.vala main-window.vala relation.vala application.vala
 
