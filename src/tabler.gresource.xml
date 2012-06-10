@@ -17,6 +17,6 @@
 -->
 <gresources>
   <gresource prefix="/org/tabler">
-    <file alias="ui/appmenu.ui" compressed="true" preprocess="xml-stripblanks">appmenu.ui</file>
+    <file compressed="true" preprocess="xml-stripblanks">appmenu.ui</file>
   </gresource>
 </gresources>

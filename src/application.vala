@@ -28,8 +28,47 @@ public class Tabler.Application : Gtk.Application {
 
 	public override void activate () {
 		if (window == null) {
-			window = new MainWindow (this);
+			create_window ();
 		}
 		window.show ();
+	}
+
+	public void show_about () {
+		string[] authors = {
+  			"Marcus Lundblad <ml@update.uu.se>"
+		};
+
+		Gtk.show_about_dialog (window,
+			   "authors", authors,
+			   "translator-credits", _("translator-credits"),
+			   "program-name", _("Tabler"),
+			   "title", _("About Tabler"),
+			   "comments", _("Tabler Seating Planning Program"),
+			   "copyright", "Copyright 2012 Marcus Lundblad",
+			   "license-type", Gtk.License.GPL_3_0,
+			   "version", Config.PACKAGE_VERSION,
+			   "website", "http://github.com/mlundblad/tabler",
+			   "wrap-license", true);
+	}
+	
+	private void create_window () {
+		window = new MainWindow (this);
+
+		var action = new GLib.SimpleAction ("quit", null);
+		action.activate.connect (() => { window.destroy (); });
+		this.add_action (action);
+
+		action = new GLib.SimpleAction ("about", null);
+		action.activate.connect (() => { show_about (); });
+		this.add_action (action);
+
+		var builder = new Gtk.Builder ();
+		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
+		try {
+  			builder.add_from_resource ("/org/tabler/appmenu.ui");
+  			set_app_menu ((MenuModel)builder.get_object ("appmenu"));
+		} catch {
+  			warning ("Failed to parsing ui file");
+		}
 	}
 }
