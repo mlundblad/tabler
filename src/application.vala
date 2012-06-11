@@ -24,6 +24,8 @@ public class Tabler.Application : Gtk.Application {
 	
     // Constructor
     public Application () {
+		Object (application_id: "org.tabler",
+		        flags: ApplicationFlags.HANDLES_OPEN);
     }
 
 	public override void activate () {
@@ -31,6 +33,19 @@ public class Tabler.Application : Gtk.Application {
 			create_window ();
 		}
 		window.show ();
+	}
+
+	public override void open (GLib.File[] files, string hint) {
+		if (files.length >= 1) {
+			var file = files[0];
+			stderr.printf ("Reading from file: %s\n", file.get_uri ());
+			arrangement = Tabler.load_from_file (file.get_uri ());
+			if (window == null) {
+				create_window ();
+			}
+			window.show ();
+		}
+		
 	}
 
 	public void show_about () {
