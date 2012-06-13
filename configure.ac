@@ -46,6 +46,7 @@ AC_OUTPUT([
 Makefile
 data/Makefile
 data/tabler.desktop.in
+icons/Makefile
 src/Makefile
 po/Makefile.in
 ])
