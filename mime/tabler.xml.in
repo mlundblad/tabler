@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-tabler">
+    <_comment>Tabler Document</_comment>
+	<magic priority="80">
+       <match value="&lt;arrangement&gt;" type="string" offset="20:100"/>
+     </magic>
+    <glob pattern="*.tabler"/>
+  </mime-type>
+</mime-info>

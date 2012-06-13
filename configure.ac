@@ -47,6 +47,7 @@ Makefile
 data/Makefile
 data/tabler.desktop.in
 icons/Makefile
+mime/Makefile
 src/Makefile
 po/Makefile.in
 ])

@@ -8,8 +8,7 @@ StartupNotify=true
 Terminal=false
 Type=Application
 Categories=Utility;
-
-# TODO: add mime type
+MimeType=application/x-tabler;
 
 _Keywords=Seating;Planning
 

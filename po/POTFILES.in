@@ -1,4 +1,5 @@
 data/tabler.desktop.in.in
+mime/tabler.xml.in
 src/tabler.vala
 src/application.vala
 src/main-window.vala
