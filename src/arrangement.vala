@@ -52,7 +52,6 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 	}
 	
 	public Xml.Node* to_xml () {
-		//TODO: generate real XML here...
 		Xml.Node* node = new Xml.Node (null, "arrangement");
 
 		if (name != null && name.length > 0)
