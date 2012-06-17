@@ -19,7 +19,7 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.GuestParser : GLib.Object {
 
-    public Guest? create_from_xml (Xml.Node* node)
+    public Guest create_from_xml (Xml.Node* node) throws ParserError
 		requires (node->name == "guest") {
 		var id = node->get_prop ("id");
 		var name = node->get_prop ("name");
@@ -28,12 +28,10 @@ public class Tabler.GuestParser : GLib.Object {
 		var rsvp = node->get_prop ("rsvp");
 
 		if (id == null) {
-			stderr.printf ("A guest must have an ID set\n");
-			return null;
+			throw new ParserError.INVALID (_("A guest must have an ID set."));
 		}
 		if (name == null) {
-			stderr.printf ("A guest must have a name set\n");
-			return null;
+			throw new ParserError.INVALID (_("A guest must have a name set."));
 		}
 
 		return new Guest.with_id (int.parse (id),

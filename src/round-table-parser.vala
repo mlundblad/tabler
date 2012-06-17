@@ -19,12 +19,11 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.RoundTableParser : GLib.Object {
 
-	public RoundTable? create_from_xml (Xml.Node* node)
+	public RoundTable create_from_xml (Xml.Node* node) throws ParserError
 		requires (node->name == "table" && node->get_prop ("type") == "round") {
 		var capacity = node->get_prop ("capacity");
 		if (capacity == null) {
-			stderr.printf ("<table/> must have a capacity set\n");
-			return null;
+			throw new ParserError.INVALID (_("Table must have a capacity set."));
 		}
 
 		return new RoundTable (int.parse (capacity));

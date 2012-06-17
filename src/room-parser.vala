@@ -19,20 +19,18 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.RoomParser : GLib.Object {
 
-	public Room? create_from_xml (Xml.Node* node)
+	public Room create_from_xml (Xml.Node* node) throws ParserError
 		requires (node->name == "room") {
 		var w = node->get_prop ("width");
 		var h = node->get_prop ("height");
 		var name = node->get_prop ("name");
 			
 		if (w == null) {
-			stderr.printf ("<room/> tag missing \"width\" attribute\n");
-			return null;
+			throw new ParserError.INVALID (_("Room missing \"width\" attribute."));
 		}
 
 		if (h == null) {
-			stderr.printf ("<room/> tag missing \"height\" attribute\n");
-			return null;
+			throw new ParserError.INVALID (_("Room missing \"height\" attribute."));
 		}
 
 		var room = new Room (int.parse (w), int.parse (h));
@@ -58,10 +56,8 @@ public class Tabler.RoomParser : GLib.Object {
 			var x = iter->get_prop ("x");
 			var y = iter->get_prop ("y");
 			
-			if (table != null) {
-				if (!room.add_table (table, int.parse (x), int.parse (y))) {
-					stderr.printf ("Unable to add table to room\n");
-				}
+			if (!room.add_table (table, int.parse (x), int.parse (y))) {
+				stderr.printf ("Unable to add table to room\n");
 			}
 		}
 			

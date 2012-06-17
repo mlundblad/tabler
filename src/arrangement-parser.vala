@@ -17,9 +17,14 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+public errordomain Tabler.ParserError {
+	INVALID
+}
+
+
 public class Tabler.ArrangementParser : GLib.Object {
 
-	public Arrangement? create_from_xml (Xml.Node* node)
+	public Arrangement create_from_xml (Xml.Node* node) throws ParserError
 		requires (node->name == "arrangement") {
 		var arrangement = new Arrangement ();
 

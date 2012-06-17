@@ -19,16 +19,15 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.TableParser : GLib.Object {
 
-	public Table? create_from_xml (Xml.Node* node)
+	public Table create_from_xml (Xml.Node* node) throws ParserError
 		requires (node->name == "table") {
 		var type = node->get_prop ("type");
 
 		if (type == null) {
-			stderr.printf ("<room/> must have a \"type\" attribute\n");
-			return null;
+			throw new ParserError.INVALID (_("Room must specify a type."));
 		}
 
-		Table? table = null;
+		Table table;
 			
 		switch (type) {
 			case "long":
@@ -40,45 +39,44 @@ public class Tabler.TableParser : GLib.Object {
 				table = parser.create_from_xml (node);
 				break;
 			default:
-				stderr.printf ("Unknow table type: %s\n", type);
+				throw new ParserError.INVALID (_("Unknown table type: %s.").printf (
+				                                type));
 				break;
 		}
 
-		if (table != null) {
-			var name = node->get_prop ("name");
+		var name = node->get_prop ("name");
 
-			if (name != null) {
-				table.name = name;
+		if (name != null) {
+			table.name = name;
+		}
+
+		// loop over child nodes
+		for (var iter = node->children ; iter != null ; iter = iter->next) {
+			if (iter->type != Xml.ElementType.ELEMENT_NODE) {
+				continue;
 			}
 
-			// loop over child nodes
-			for (var iter = node->children ; iter != null ; iter = iter->next) {
-				if (iter->type != Xml.ElementType.ELEMENT_NODE) {
+			if (iter->name == "guest") {
+				var id = iter->get_prop ("id");
+				if (id == null) {
+					stderr.printf ("<guest/> node must have an \"id\" attribute\n");
 					continue;
 				}
 
-				if (iter->name == "guest") {
-					var id = iter->get_prop ("id");
-					if (id == null) {
-						stderr.printf ("<guest/> node must have an \"id\" attribute\n");
-						continue;
-					}
-
-					var guest = Guest.find_by_id (int.parse (id));
-					if (guest == null) {
-						stderr.printf ("Guest with id %s not defined in arrangement\n",
-						               id);
-						continue;
-					}
-
-					var position = iter->get_prop ("position");
-					if (position == null) {
-						stderr.printf ("A guest must have a position on a table\n");
-						continue;
-					}
-
-					table.insert_guest (guest, int.parse (position));
+				var guest = Guest.find_by_id (int.parse (id));
+				if (guest == null) {
+					stderr.printf ("Guest with id %s not defined in arrangement\n",
+						           id);
+					continue;
 				}
+
+				var position = iter->get_prop ("position");
+				if (position == null) {
+					stderr.printf ("A guest must have a position on a table\n");
+					continue;
+				}
+
+				table.insert_guest (guest, int.parse (position));
 			}
 		}
 

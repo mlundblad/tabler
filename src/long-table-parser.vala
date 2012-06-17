@@ -19,18 +19,16 @@ tabler is free software: you can redistribute it and/or modify it
 
 public class Tabler.LongTableParser : GLib.Object {
 
-    public LongTable? create_from_xml (Xml.Node* node)
+    public LongTable create_from_xml (Xml.Node* node) throws ParserError
 		requires (node->name == "table" && node->get_prop ("type") == "long") {
 		var capacity = node->get_prop ("capacity");
 		if (capacity == null) {
-			stderr.printf ("<table/> must have a capacity set\n");
-			return null;
+			throw new ParserError.INVALID (_("A table must specify a capacity."));
 		}
 
 		var orientation_attr = node->get_prop ("orientation");
 		if (orientation_attr == null) {
-			stderr.printf ("Table of type \"long\" must specify an orientation\n");
-			return null;
+			throw new ParserError.INVALID (_("Table of type \"long\" must specify an orientation."));
 		}
 
 		LongTable.Orientation orientation;
@@ -43,7 +41,8 @@ public class Tabler.LongTableParser : GLib.Object {
 				break;
 			default:
 				stderr.printf ("Unknow orientation: %s\n", orientation_attr);
-				return null;
+				throw new ParserError.INVALID (_("Unknown orientation: %s.").printf(
+				                                         orientation_attr));
 		}
 
 		var setting = new LongTable.Setting ();

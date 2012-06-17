@@ -39,10 +39,28 @@ public class Tabler.Application : Gtk.Application {
 		if (files.length >= 1) {
 			var file = files[0];
 			stderr.printf ("Reading from file: %s\n", file.get_uri ());
-			arrangement = Tabler.load_from_file (file.get_uri ());
+			
 			if (window == null) {
 				create_window ();
 			}
+
+			try {
+				arrangement = Tabler.load_from_file (file.get_uri ());
+			} catch (ParserError e) {
+				stderr.printf (_("An error occured while reading file %s: %s\n"),
+				                 file.get_uri(), e.message);
+				var dialog = new Gtk.MessageDialog (this.window,
+				                                Gtk.DialogFlags.DESTROY_WITH_PARENT,
+				                                Gtk.MessageType.ERROR,
+				                                Gtk.ButtonsType.CLOSE,
+				      _("Error loading file %s"), file.get_uri ());
+  				dialog.set_title(_("Invalid file"));
+  				dialog.show ();
+  				dialog.response.connect ( (id) => {
+					dialog.destroy ();
+				});
+			}
+	
 			window.show ();
 		}
 		

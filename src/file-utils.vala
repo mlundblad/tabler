@@ -50,7 +50,7 @@ namespace Tabler {
 		}
 	}
 
-	public Arrangement? load_from_file (string filename) {
+	public Arrangement? load_from_file (string filename) throws ParserError {
 		Xml.Doc* doc = Xml.Parser.parse_file (filename);
 		if (doc == null) {
 			stderr.printf ("File does not exist, or could not be accessed: %s\n",
