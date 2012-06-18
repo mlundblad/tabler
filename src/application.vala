@@ -45,9 +45,7 @@ public class Tabler.Application : Gtk.Application {
 				  							message, message_arg);
 		dialog.set_title (title);
 		dialog.show ();
-		dialog.response.connect ( (id) => {
-			dialog.destroy ();
-		});
+		dialog.response.connect ( (id) => { dialog.destroy (); });
 	}
 
 	public override void open (GLib.File[] files, string hint) {
@@ -63,9 +61,12 @@ public class Tabler.Application : Gtk.Application {
 				arrangement = Tabler.load_from_file (file.get_uri ());
 			} catch (ParserError e) {
 				stderr.printf (_("An error occured while reading file %s: %s\n"),
-				                 file.get_uri(), e.message);
+				                 file.get_uri (), e.message);
 				show_error (_("Invalid file"), _("Error loading %s."),
 				            file.get_basename ());
+			} catch (FileError e) {
+				show_error (_("File not found or could not be read."),
+				            _("%s not found."), file.get_path ());
 			}
 
 			window.show ();

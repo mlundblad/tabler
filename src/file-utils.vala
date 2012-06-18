@@ -19,6 +19,10 @@ tabler is free software: you can redistribute it and/or modify it
 
 namespace Tabler {
 
+	public errordomain FileError {
+		COULD_NOT_READ
+	}
+	
 	public void save_to_file (Arrangement arrangement, string filename)
 		throws Error {		
 		File file = File.new_for_path (filename);
@@ -50,22 +54,21 @@ namespace Tabler {
 		}
 	}
 
-	public Arrangement? load_from_file (string filename) throws ParserError {
+	public Arrangement? load_from_file (string filename)
+		throws ParserError, FileError {
 		Xml.Doc* doc = Xml.Parser.parse_file (filename);
-		if (doc == null) {
-			stderr.printf ("File does not exist, or could not be accessed: %s\n",
-			               filename);
-			return null;
-		}
-
-		Xml.Node* root = doc->get_root_element ();
-		if (root == null) {
-			stderr.printf ("File is empty: %s\n", filename);
-			delete doc;
-			return null;
-		}
 
 		try {
+			if (doc == null) {
+				throw new FileError.COULD_NOT_READ (_("File doesn't exist, or could not be accessed."));
+			}
+
+			Xml.Node* root = doc->get_root_element ();
+			if (root == null) {
+				stderr.printf ("File is empty: %s\n", filename);
+				throw new ParserError.INVALID (_("Error loading file"));
+			}
+
 			var parser = new ArrangementParser ();
 			var arrangement = parser.create_from_xml (root);
 			return arrangement;
