@@ -66,7 +66,7 @@ public class Tabler.Application : Gtk.Application {
 				            file.get_basename ());
 			} catch (FileError e) {
 				show_error (_("File not found or could not be read."),
-				            _("%s not found."), file.get_path ());
+				            _("%s not found or could not be read."), file.get_path ());
 			}
 
 			window.show ();
