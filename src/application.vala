@@ -35,6 +35,21 @@ public class Tabler.Application : Gtk.Application {
 		window.show ();
 	}
 
+	// show an error message dialog with a message format string taking an
+	// optional message arg (as a string)
+	private void show_error (string title, string message, string? message_arg) {
+		var dialog = new Gtk.MessageDialog (this.window,
+				                            Gtk.DialogFlags.DESTROY_WITH_PARENT,
+				                            Gtk.MessageType.ERROR,
+				                            Gtk.ButtonsType.CLOSE,
+				  							message, message_arg);
+		dialog.set_title (title);
+		dialog.show ();
+		dialog.response.connect ( (id) => {
+			dialog.destroy ();
+		});
+	}
+
 	public override void open (GLib.File[] files, string hint) {
 		if (files.length >= 1) {
 			var file = files[0];
@@ -49,18 +64,10 @@ public class Tabler.Application : Gtk.Application {
 			} catch (ParserError e) {
 				stderr.printf (_("An error occured while reading file %s: %s\n"),
 				                 file.get_uri(), e.message);
-				var dialog = new Gtk.MessageDialog (this.window,
-				                                Gtk.DialogFlags.DESTROY_WITH_PARENT,
-				                                Gtk.MessageType.ERROR,
-				                                Gtk.ButtonsType.CLOSE,
-				      _("Error loading file %s"), file.get_uri ());
-  				dialog.set_title(_("Invalid file"));
-  				dialog.show ();
-  				dialog.response.connect ( (id) => {
-					dialog.destroy ();
-				});
+				show_error (_("Invalid file"), _("Error loading %s."),
+				            file.get_basename ());
 			}
-	
+
 			window.show ();
 		}
 		
