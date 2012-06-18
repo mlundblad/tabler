@@ -65,11 +65,13 @@ namespace Tabler {
 			return null;
 		}
 
-		var parser = new ArrangementParser ();
-		var arrangement = parser.create_from_xml (root);
-
-		delete doc;
-		return arrangement;
+		try {
+			var parser = new ArrangementParser ();
+			var arrangement = parser.create_from_xml (root);
+			return arrangement;
+		} finally {
+			delete doc;
+		}
 	}
 		
 }
