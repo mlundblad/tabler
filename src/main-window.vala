@@ -30,7 +30,22 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		window_position = Gtk.WindowPosition.CENTER;
 		set_default_size (DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		hide_titlebar_when_maximized = true;
+
+		// setup UI
+		var builder = new Gtk.Builder ();
+		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
+		try {
+  			builder.add_from_resource ("/org/tabler/main-window.ui");
+		} catch {
+			warning (_("Could not load UI."));
+			return;
+		}
+
+		var toolbar = builder.get_object ("toolbar") as Gtk.Toolbar;
+		toolbar.get_style_context ().add_class (Gtk.STYLE_CLASS_PRIMARY_TOOLBAR);
 		
+		add (builder.get_object ("main-box") as Gtk.Widget);
+
 		// TODO: actually do something real here, like asking to save, etc.
 		destroy.connect (Gtk.main_quit);
     }
