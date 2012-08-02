@@ -4,3 +4,4 @@ src/tabler.vala
 src/application.vala
 src/main-window.vala
 [type: gettext/glade]src/appmenu.ui
+[type: gettext/glade]src/main-window.ui

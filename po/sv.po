@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tabler 0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-13 22:15+0200\n"
+"POT-Creation-Date: 2012-08-02 22:03+0200\n"
 "PO-Revision-Date: 2012-03-08 23:44+0100\n"
 "Last-Translator: Marcus Lundblad <ml@update.uu.se>\n"
 "Language-Team: Swedish\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/tabler.desktop.in.in.h:1 ../src/application.vala:59
+#: ../data/tabler.desktop.in.in.h:1 ../src/application.vala:85
 msgid "Tabler"
 msgstr "Tabler"
 
@@ -33,19 +33,44 @@ msgstr "Sittningar;Planering"
 msgid "Tabler Document"
 msgstr "Tabler-dokument"
 
-#: ../src/application.vala:58
+#: ../src/application.vala:63
+#, c-format
+msgid "An error occured while reading file %s: %s\n"
+msgstr "Ett fel inträffade vid läsning av filen %s: %s\n"
+
+#: ../src/application.vala:65
+msgid "Invalid file"
+msgstr "Ogiltig fil"
+
+#: ../src/application.vala:65
+#, c-format
+msgid "Error loading %s."
+msgstr "Fel vid läsning av %s."
+
+#: ../src/application.vala:68
+msgid "File not found or could not be read."
+msgstr "Fil saknas eller är oläslig."
+
+#: ../src/application.vala:69
+#, c-format
+msgid "%s not found or could not be read."
+msgstr "%s finns inte eller kunde inte läsas in."
+
+#: ../src/application.vala:84
 msgid "translator-credits"
 msgstr ""
 
-#: ../src/application.vala:60
-#, fuzzy
+#: ../src/application.vala:86
 msgid "About Tabler"
 msgstr "Om Tabler"
 
-#: ../src/application.vala:61
-#, fuzzy
+#: ../src/application.vala:87
 msgid "Tabler Seating Planning Program"
 msgstr "Tabler, ett program för att planera sittningar"
+
+#: ../src/main-window.vala:40
+msgid "Could not load UI."
+msgstr "Kunde inte ladda användargränssnitt."
 
 #: ../src/appmenu.ui.h:1
 msgid "_About"
@@ -54,6 +79,14 @@ msgstr "_Om"
 #: ../src/appmenu.ui.h:2
 msgid "_Quit"
 msgstr "_Avsluta"
+
+#: ../src/main-window.ui.h:1
+msgid "Floorplan"
+msgstr "Bordsplacering"
+
+#: ../src/main-window.ui.h:2
+msgid "Relations"
+msgstr "Relationer"
 
 #~ msgid "Failed to load file: %s\n"
 #~ msgstr "Misslyckades att ladda fil: %s\n"
