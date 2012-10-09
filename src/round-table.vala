@@ -26,8 +26,8 @@ public class Tabler.RoundTable : Tabler.Table {
 
 	public override void get_extents (out uint width, out uint height) {
 		var diam = GLib.Math.ceil (capacity / 4);
-		width = (uint) diam + 2;
-		height = (uint) diam + 2;
+		width = ((uint) diam + 2) * 5;
+		height = ((uint) diam + 2) * 5;
 	}
 
 	public override Xml.Node* to_xml () {

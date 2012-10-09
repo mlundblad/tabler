@@ -76,8 +76,8 @@ public class Tabler.LongTable : Tabler.Table, Tabler.XmlSerializable {
 		if (setting.right)
 			seats_long--;
 
-		uint length = seats_long / 2;
-		uint breadth = 1 + (setting.up ? 1 : 0) + (setting.down ? 1 : 0);
+		uint length = seats_long / 2 * 5;
+		uint breadth = (1 + (setting.up ? 1 : 0) + (setting.down ? 1 : 0)) * 5;
 
 		if (orientation == Orientation.HORIZONTAL) {
 			width = length;
