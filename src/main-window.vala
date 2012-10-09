@@ -34,12 +34,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		// setup UI
 		var builder = new Gtk.Builder ();
 		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
-		try {
-  			builder.add_from_resource ("/org/tabler/main-window.ui");
-		} catch {
-			warning (_("Could not load UI."));
-			return;
-		}
+  		builder.add_from_resource ("/org/tabler/main-window.ui");
 
 		var toolbar = builder.get_object ("toolbar") as Gtk.Toolbar;
 		toolbar.get_style_context ().add_class (Gtk.STYLE_CLASS_PRIMARY_TOOLBAR);

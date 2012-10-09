@@ -105,11 +105,7 @@ public class Tabler.Application : Gtk.Application {
 
 		var builder = new Gtk.Builder ();
 		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
-		try {
-  			builder.add_from_resource ("/org/tabler/appmenu.ui");
-  			set_app_menu ((MenuModel)builder.get_object ("appmenu"));
-		} catch {
-  			warning ("Failed to parsing ui file");
-		}
+ 		builder.add_from_resource ("/org/tabler/appmenu.ui");
+  		set_app_menu ((MenuModel)builder.get_object ("appmenu"));
 	}
 }
