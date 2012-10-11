@@ -10,6 +10,9 @@
       <object class="GtkToolbar" id="toolbar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+	<style>
+	  <class name="menubar"/>
+	</style>
         <child>
           <object class="GtkToolButton" id="save-button">
             <property name="use_action_appearance">False</property>
