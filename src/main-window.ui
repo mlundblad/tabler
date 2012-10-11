@@ -60,12 +60,15 @@
 		<property name="visible">True</property>
 		<property name="can_focus">False</property>
 		<property name="orientation">horizontal</property>
+		<property name="border_width">12</property>
+		<property name="spacing">12</property>
 
 		<child>
 		  <object class="GtkBox" id="guestlist-box">
 		    <property name="visible">True</property>
 		    <property name="can_focus">False</property>
 		    <property name="orientation">vertical</property>
+
 		    <child>
 		      <object class="GtkScrolledWindow" id="guests-tree-scrolledwindow">
 			<property name="visible">True</property>
