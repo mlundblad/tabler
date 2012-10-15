@@ -45,9 +45,6 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 			// shouldn't happen
 			stderr.printf ("Unable to parse UI definition.\n");
 		}
-		
-		// TODO: actually do something real here, like asking to save, etc.
-		destroy.connect (Gtk.main_quit);
     }
 
 }
