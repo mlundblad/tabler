@@ -121,4 +121,10 @@ public class Tabler.Application : Gtk.Application {
 			   "website", "http://github.com/mlundblad/tabler",
 			   "wrap-license", true);
 	}
+
+	public void quit () {
+		foreach (var window in get_windows ()) {
+			window.destroy ();
+		}
+	}
 }
