@@ -21,7 +21,7 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 
 	private static uint next_id = 1;
 	
-	public uint id { get; private set; }
+	public uint id { get; set; }
 	public string name { get; set; }
 	public Gender gender { get; set; }
 	public bool vip { get; set; }

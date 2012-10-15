@@ -21,10 +21,14 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	static const int DEFAULT_WIDTH = 800;
 	static const int DEFAULT_HEIGHT = 600;
+
+	private Arrangement arrangement;
 	
     // Constructor
-    public MainWindow (Gtk.Application app) {
+    public MainWindow (Gtk.Application app, Arrangement arrangement) {
 		Object (application: app);
+		this.arrangement = arrangement;
+		
 		// TODO: add localization support...
 		title = "Tabler";
 		window_position = Gtk.WindowPosition.CENTER;
