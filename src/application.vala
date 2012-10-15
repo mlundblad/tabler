@@ -41,9 +41,14 @@ public class Tabler.Application : Gtk.Application {
 
 		var builder = new Gtk.Builder ();
 		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
- 		builder.add_from_resource ("/org/tabler/appmenu.ui");
-  		set_app_menu ((MenuModel)builder.get_object ("appmenu"));
-
+		try {
+ 			builder.add_from_resource ("/org/tabler/appmenu.ui");
+  			set_app_menu ((MenuModel)builder.get_object ("appmenu"));
+		} catch (GLib.Error error) {
+			// shouldn't happen...
+			stderr.printf ("Unable to parse UI definition.\n");
+		}
+			
 		if (get_windows ().length () == 0) {
 			window = new MainWindow (this, new Arrangement ());
 			add_window (window);
