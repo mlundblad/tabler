@@ -30,9 +30,23 @@ public class Tabler.Application : Gtk.Application {
 	public override void activate () {
 		Gtk.Window window;
 
+		stderr.printf ("activate called\n");
 
+		add_app_menu ();
+		
+		if (get_windows ().length () == 0) {
+			window = new MainWindow (this, new Arrangement ());
+			add_window (window);
+		} else {
+			window = get_windows().data;
+		}
+
+		window.show ();
+	}
+
+	private void add_app_menu () {
 		var action = new GLib.SimpleAction ("quit", null);
-		action.activate.connect (() => { quit (); });
+		action.activate.connect (() => { on_quit (); });
 		this.add_action (action);
 
 		action = new GLib.SimpleAction ("about", null);
@@ -48,15 +62,6 @@ public class Tabler.Application : Gtk.Application {
 			// shouldn't happen...
 			stderr.printf ("Unable to parse UI definition.\n");
 		}
-			
-		if (get_windows ().length () == 0) {
-			window = new MainWindow (this, new Arrangement ());
-			add_window (window);
-		} else {
-			window = get_windows().data;
-		}
-
-		window.show ();
 	}
 
 	// show an error message dialog with a message format string taking an
@@ -76,11 +81,17 @@ public class Tabler.Application : Gtk.Application {
 
 	private void create_window (Arrangement arrangement) {
 		var window = new MainWindow (this, arrangement);
+		stderr.printf ("create window\n");
 		add_window (window);
 		window.show ();
+
+		stderr.printf ("# windows: %u\n", get_windows ().length ());
 	}
 	
 	public override void open (GLib.File[] files, string hint) {
+
+		add_app_menu ();
+
 		foreach (var file in files) {
 			stderr.printf ("Reading from file: %s\n", file.get_uri ());
 			
@@ -101,7 +112,6 @@ public class Tabler.Application : Gtk.Application {
 				continue;
 			}
 		}
-		
 	}
 
 	public void show_about () {
@@ -122,8 +132,11 @@ public class Tabler.Application : Gtk.Application {
 			   "wrap-license", true);
 	}
 
-	public void quit () {
-		foreach (var window in get_windows ()) {
+	private void on_quit () {
+		var windows = get_windows ().copy ();
+
+		foreach (var window in windows) {
+			stderr.printf ("destroying window: \n");
 			window.destroy ();
 		}
 	}
