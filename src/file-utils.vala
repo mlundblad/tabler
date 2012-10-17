@@ -22,36 +22,38 @@ namespace Tabler {
 	public errordomain FileError {
 		COULD_NOT_READ
 	}
-	
-	public void save_to_file (Arrangement arrangement, string filename)
-		throws Error {		
+
+	public bool file_exists (string filename) {
 		File file = File.new_for_path (filename);
 
-		if (!file.query_exists ()) {
-			Xml.Doc* doc = new Xml.Doc ("1.0");
-			Xml.Node* node = arrangement.to_xml ();
-			string xmlstr;
+		return file.query_exists ();
+	}
+	
+	public void save_to_file (Arrangement arrangement, string filename)
+		throws FileError {		
+		File file = File.new_for_path (filename);
 
-			// TODO: set a namespace
-			doc->set_root_element (node);
+		Xml.Doc* doc = new Xml.Doc ("1.0");
+		Xml.Node* node = arrangement.to_xml ();
+		string xmlstr;
+
+		// TODO: set a namespace
+		doc->set_root_element (node);
 			
-			doc->dump_memory (out xmlstr);
+		doc->dump_memory (out xmlstr);
 
-			var dos =
-				new DataOutputStream (file.create (FileCreateFlags.REPLACE_DESTINATION));
-			var data = xmlstr.data;
-			long written = 0;
+		var dos =
+			new DataOutputStream (file.create (FileCreateFlags.REPLACE_DESTINATION));
+		var data = xmlstr.data;
+		long written = 0;
 
-			while (written < data.length) {
-				written += dos.write (data[written:data.length]);
-			}
-
-			stdout.printf ("written %ld bytes\n", written);
-
-			delete doc;
-		} else {
-			//TODO: throw an error
+		while (written < data.length) {
+			written += dos.write (data[written:data.length]);
 		}
+
+		stdout.printf ("written %ld bytes\n", written);
+
+		delete doc;
 	}
 
 	public Arrangement? load_from_file (string filename)

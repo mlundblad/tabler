@@ -23,6 +23,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	static const int DEFAULT_HEIGHT = 600;
 
 	private Arrangement arrangement;
+	public string file_uri { get; private set; }
 	
     // Constructor
     public MainWindow (Gtk.Application app, Arrangement arrangement) {
@@ -45,6 +46,34 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 			// shouldn't happen
 			stderr.printf ("Unable to parse UI definition.\n");
 		}
+
+		// bound action for the save toolbar button
+		var save_button = builder.get_object ("save-button") as Gtk.ToolButton;
+		save_button.clicked.connect (on_save_clicked);
     }
 
+	private void on_save_clicked (Gtk.ToolButton button) {
+		if (file_uri == null) {
+			// show file save dialog
+			var save_dialog =
+				new Gtk.FileChooserDialog (_("Save arrangement"), this,
+			                               Gtk.FileChooserAction.SAVE,
+				                           Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
+				                           Gtk.STOCK_SAVE, Gtk.ResponseType.ACCEPT);
+
+			if (save_dialog.run () == Gtk.ResponseType.ACCEPT) {
+				file_uri = save_dialog.get_filename ();
+			} else {
+				return;
+			}
+
+			save_dialog.destroy ();
+		}
+
+		if (Table.file_exists (file_uri)) {
+			// TODO: ask for overwrite confirmation
+		}
+		
+		Tabler.save_to_file (arrangement, file_uri);
+	}
 }
