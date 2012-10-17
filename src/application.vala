@@ -30,10 +30,8 @@ public class Tabler.Application : Gtk.Application {
 	public override void activate () {
 		Gtk.Window window;
 
-		stderr.printf ("activate called\n");
-
 		add_app_menu ();
-		
+
 		if (get_windows ().length () == 0) {
 			window = new MainWindow (this, new Arrangement ());
 			add_window (window);
@@ -81,11 +79,9 @@ public class Tabler.Application : Gtk.Application {
 
 	private void create_window (Arrangement arrangement) {
 		var window = new MainWindow (this, arrangement);
-		stderr.printf ("create window\n");
+
 		add_window (window);
 		window.show ();
-
-		stderr.printf ("# windows: %u\n", get_windows ().length ());
 	}
 	
 	public override void open (GLib.File[] files, string hint) {
@@ -136,7 +132,6 @@ public class Tabler.Application : Gtk.Application {
 		var windows = get_windows ().copy ();
 
 		foreach (var window in windows) {
-			stderr.printf ("destroying window: \n");
 			window.destroy ();
 		}
 	}
