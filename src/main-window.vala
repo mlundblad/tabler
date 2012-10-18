@@ -58,8 +58,8 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 			var save_dialog =
 				new Gtk.FileChooserDialog (_("Save arrangement"), this,
 			                               Gtk.FileChooserAction.SAVE,
-				                           Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-				                           Gtk.STOCK_SAVE, Gtk.ResponseType.ACCEPT);
+				                           Gtk.Stock.CANCEL, Gtk.ResponseType.CANCEL,
+				                           Gtk.Stock.SAVE, Gtk.ResponseType.ACCEPT);
 
 			if (save_dialog.run () == Gtk.ResponseType.ACCEPT) {
 				file_uri = save_dialog.get_filename ();
