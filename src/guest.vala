@@ -17,7 +17,8 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
+public class Tabler.Guest :
+	GLib.Object, Gee.Comparable<Tabler.Guest>, Tabler.XmlSerializable {
 
 	private static uint next_id = 1;
 	
@@ -71,6 +72,10 @@ public class Tabler.Guest : GLib.Object, Tabler.XmlSerializable {
 	
 	public Relation get_relation_to (Guest to) {
 		return relations.get (to);
+	}
+
+	public int compare_to (Guest other) {
+		return name.collate (other.name);
 	}
 
 	public Xml.Node* to_xml () {
