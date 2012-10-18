@@ -30,7 +30,7 @@ namespace Tabler {
 	}
 	
 	public void save_to_file (Arrangement arrangement, string filename)
-		throws FileError {		
+		throws GLib.IOError, GLib.Error {		
 		File file = File.new_for_path (filename);
 
 		Xml.Doc* doc = new Xml.Doc ("1.0");
