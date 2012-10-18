@@ -50,7 +50,20 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		// bound action for the save toolbar button
 		var save_button = builder.get_object ("save-button") as Gtk.ToolButton;
 		save_button.clicked.connect (on_save_clicked);
+
+		// setup the guest list
+		var guest_view = builder.get_object ("guestlist-view") as Gtk.TreeView;
+		setup_guest_list (guest_view);
     }
+
+	private void setup_guest_list (Gtk.TreeView guest_view) {
+		var listmodel = new Gtk.ListStore (1, typeof (string));
+
+		guest_view.set_model (listmodel);
+		guest_view.insert_column_with_attributes (-1, _("Name"), 
+		                                          new Gtk.CellRendererText (),
+		                                          "text", 0);
+	}
 
 	private void on_save_clicked (Gtk.ToolButton button) {
 		if (file_uri == null) {
