@@ -70,10 +70,10 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 			save_dialog.destroy ();
 		}
 
-		if (Table.file_exists (file_uri)) {
+		if (Tabler.file_exists (file_uri)) {
 			// TODO: ask for overwrite confirmation
 		}
-		
+
 		Tabler.save_to_file (arrangement, file_uri);
 	}
 }
