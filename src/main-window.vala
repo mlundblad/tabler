@@ -57,13 +57,21 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
     }
 
 	private void setup_guest_list (Gtk.TreeView guest_view) {
-		var listmodel = new Gtk.ListStore (1, typeof (string));
+		var listmodel = new Gtk.ListStore (2, typeof (string), typeof (Guest));
 
 		guest_view.set_model (listmodel);
 		guest_view.insert_column_with_attributes (-1, _("Name"), 
 		                                          new Gtk.CellRendererText (),
 		                                          "text", 0);
+
+		// add guests
+		Gtk.TreeIter iter;
+		foreach (var guest in arrangement.guests.values) {
+			listmodel.append (out iter);
+			listmodel.set (iter, 0, guest.name, 1, guest);
+		}
 	}
+
 
 	private void on_save_clicked (Gtk.ToolButton button) {
 		if (file_uri == null) {
