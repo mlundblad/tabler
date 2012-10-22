@@ -27,16 +27,20 @@ public class Tabler.Application : Gtk.Application {
 		        flags: ApplicationFlags.HANDLES_OPEN);
     }
 
+	public override void startup () {
+		base.startup ();
+		
+		add_app_menu ();
+	}
+	
 	public override void activate () {
 		Gtk.Window window;
-
-		add_app_menu ();
 
 		if (get_windows ().length () == 0) {
 			window = new MainWindow (this, new Arrangement ());
 			add_window (window);
 		} else {
-			window = get_windows().data;
+			window = get_windows ().data;
 		}
 
 		window.show ();
