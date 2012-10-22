@@ -59,6 +59,8 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	private void setup_guest_list (Gtk.TreeView guest_view) {
 		var listmodel = new Gtk.ListStore (2, typeof (string), typeof (Guest));
 
+		listmodel.set_sort_column_id (0, Gtk.SortType.ASCENDING);
+		
 		guest_view.set_model (listmodel);
 		guest_view.insert_column_with_attributes (-1, _("Name"), 
 		                                          new Gtk.CellRendererText (),
