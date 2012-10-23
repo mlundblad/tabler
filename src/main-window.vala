@@ -24,6 +24,8 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	private Arrangement arrangement;
 	public string file_uri { get; private set; }
+
+	private Gtk.Builder builder;
 	
     // Constructor
     public MainWindow (Gtk.Application app, Arrangement arrangement) {
@@ -37,7 +39,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		hide_titlebar_when_maximized = true;
 
 		// setup UI
-		var builder = new Gtk.Builder ();
+		builder = new Gtk.Builder ();
 		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
 		try {
   			builder.add_from_resource ("/org/tabler/main-window.ui");
@@ -72,8 +74,21 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 			listmodel.append (out iter);
 			listmodel.set (iter, 0, guest.name, 1, guest);
 		}
+
+		var selection = guest_view.get_selection ();
+		selection.changed.connect (on_guest_selection_changed);
 	}
 
+	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
+		var remove_button = builder.get_object ("guest-remove") as Gtk.ToolButton;
+		
+		if (selection.count_selected_rows () == 1) {
+			// set delete button active
+			remove_button.sensitive = true;
+		} else {
+			remove_button.sensitive = false;
+		}	
+	}
 
 	private void on_save_clicked (Gtk.ToolButton button) {
 		if (file_uri == null) {

@@ -106,7 +106,7 @@
 			  <class name="inline-toolbar"/>
 			</style>
 			<child>
-			  <object class="GtkToolButton" id="guest_add">
+			  <object class="GtkToolButton" id="guest-add">
 			    <property name="use_action_appearance">False</property>
 			    <property name="visible">True</property>
 			    <property name="label" translatable="yes">Add Guest</property>
@@ -121,7 +121,7 @@
 			</child>
 		    
 			<child>
-			  <object class="GtkToolButton" id="guest_remove">
+			  <object class="GtkToolButton" id="guest-remove">
 			    <property name="use_action_appearance">False</property>
 			    <property name="visible">True</property>
 			    <property name="label" translatable="yes">Remove Guest</property>
