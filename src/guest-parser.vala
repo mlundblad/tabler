@@ -39,6 +39,7 @@ public class Tabler.GuestParser : GLib.Object {
 			              		  gender == "male" ? Gender.MALE :
 			              	      gender == "female" ? Gender.FEMALE :
 			                      Gender.UNKNOWN,
-			          			  bool.parse (vip), bool.parse (rsvp));
+			          			  bool.parse (vip ?? "false"),
+			                      bool.parse (rsvp ?? "false"));
 	}
 }
