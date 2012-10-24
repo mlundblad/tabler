@@ -118,17 +118,17 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 			if (save_dialog.run () == Gtk.ResponseType.ACCEPT) {
 				file_uri = save_dialog.get_filename ();
-			} else {
-				return;
+
+				if (Tabler.file_exists (file_uri)) {
+					// TODO: ask for overwrite confirmation
+				}
+
+				Tabler.save_to_file (arrangement, file_uri);
 			}
 
 			save_dialog.destroy ();
 		}
 
-		if (Tabler.file_exists (file_uri)) {
-			// TODO: ask for overwrite confirmation
-		}
-
-		Tabler.save_to_file (arrangement, file_uri);
+		
 	}
 }
