@@ -88,9 +88,9 @@ public class Tabler.Guest :
 			            gender == Gender.FEMALE ? "female" : "unknown");
 		node->new_prop ("vip", vip.to_string ());
 		node->new_prop ("rsvp", rsvp.to_string ());
-
+						
 		// add node for relations
-		Xml.Node* relations_node = node->add_child ("relations");
+		Xml.Node* relations_node = node->new_child (null, "relations");
 
 		foreach (var guest in guest_map.values) {
 			if (has_relation_to (guest)) {
