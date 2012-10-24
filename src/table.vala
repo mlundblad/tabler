@@ -59,6 +59,15 @@ public abstract class Tabler.Table : GLib.Object, Tabler.XmlSerializable {
 		requires (position < capacity) {
 		guests[position] = guest;
 	}
+
+	public void unset_guest (Guest guest) {
+		for (var i = 0 ; i < capacity ; i++) {
+			if (guests[i] == guest) {
+				guests[i] = null;
+				return;
+			}
+		}
+	}
 	
 	public virtual Xml.Node* to_xml () {
 		Xml.Node* node = new Xml.Node (null, "table");

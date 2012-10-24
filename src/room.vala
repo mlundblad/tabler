@@ -158,7 +158,7 @@ public class Tabler.Room : GLib.Object, Tabler.XmlSerializable {
 		}
 	}
 
-	public Iterator iterator () {
+	public Iterator<TableSlot> iterator () {
 		return tables.iterator ();
 	}
 

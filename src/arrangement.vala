@@ -35,6 +35,17 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 		guests.set (guest.name, guest);
 	}
 
+	public void remove_guest (Guest guest) {
+		guests.unset (guest.name);
+
+		// remove guest from tables
+		foreach (var room in rooms) {
+			foreach (var slot in room) {
+				slot.table.unset_guest (guest);
+			}
+		}
+	}
+
 	public void add_room (Room room) {
 		rooms.add (room);
 	}

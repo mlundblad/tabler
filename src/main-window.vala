@@ -77,6 +77,9 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 		var selection = guest_view.get_selection ();
 		selection.changed.connect (on_guest_selection_changed);
+
+		var remove_button = builder.get_object ("guest-remove") as Gtk.ToolButton;
+		remove_button.clicked.connect (on_remove_clicked);
 	}
 
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
@@ -90,6 +93,20 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		}	
 	}
 
+	private void on_remove_clicked (Gtk.ToolButton button) {
+		var guest_view = builder.get_object ("guestlist-view") as Gtk.TreeView;
+		var selection = guest_view.get_selection ();
+		var listmodel = guest_view.get_model () as Gtk.ListStore;
+		Gtk.TreeIter tree_iter;
+		Guest guest;
+		
+		selection.get_selected (null, out tree_iter);
+		
+		listmodel.get (tree_iter, 1, out guest);
+		arrangement.remove_guest (guest);
+		listmodel.remove (tree_iter);
+	}
+	
 	private void on_save_clicked (Gtk.ToolButton button) {
 		if (file_uri == null) {
 			// show file save dialog
