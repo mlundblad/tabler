@@ -33,7 +33,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		this.arrangement = arrangement;
 		
 		// TODO: add localization support...
-		title = "Tabler";
+		title = _("Tabler - Unnamed");
 		window_position = Gtk.WindowPosition.CENTER;
 		set_default_size (DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		hide_titlebar_when_maximized = true;
@@ -78,6 +78,9 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		var selection = guest_view.get_selection ();
 		selection.changed.connect (on_guest_selection_changed);
 
+		var add_button = builder.get_object ("guest-add") as Gtk.ToolButton;
+		add_button.clicked.connect (on_add_clicked);
+		
 		var remove_button = builder.get_object ("guest-remove") as Gtk.ToolButton;
 		remove_button.clicked.connect (on_remove_clicked);
 	}
@@ -93,6 +96,10 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		}	
 	}
 
+	private void on_add_clicked (Gtk.ToolButton button) {
+		// TODO: show add dialog
+	}
+	
 	private void on_remove_clicked (Gtk.ToolButton button) {
 		var guest_view = builder.get_object ("guestlist-view") as Gtk.TreeView;
 		var selection = guest_view.get_selection ();

@@ -18,7 +18,7 @@ tabler is free software: you can redistribute it and/or modify it
  */
 
 public class Tabler.Guest :
-	GLib.Object, Gee.Comparable<Tabler.Guest>, Tabler.XmlSerializable {
+	GLib.Object, Gee.Comparable<Guest>, Tabler.XmlSerializable {
 
 	private static uint next_id = 1;
 	
