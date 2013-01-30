@@ -31,8 +31,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
     public MainWindow (Gtk.Application app, Arrangement arrangement) {
 		Object (application: app);
 		this.arrangement = arrangement;
-		
-		// TODO: add localization support...
+
 		title = _("Tabler - Unnamed");
 		window_position = Gtk.WindowPosition.CENTER;
 		set_default_size (DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -135,7 +134,5 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 			save_dialog.destroy ();
 		}
-
-		
 	}
 }
