@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
+  <requires lib="gtk+" version="3.0"/>
   <object class="GtkListStore" id="liststore1"/>
   <object class="GtkBox" id="main-box">
     <property name="visible">True</property>
@@ -10,15 +11,11 @@
       <object class="GtkToolbar" id="toolbar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-	<style>
-	  <class name="menubar"/>
-	</style>
         <child>
           <object class="GtkToolButton" id="save-button">
             <property name="use_action_appearance">False</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="use_action_appearance">False</property>
             <property name="is_important">True</property>
             <property name="use_underline">True</property>
             <property name="stock_id">gtk-save</property>
@@ -28,6 +25,9 @@
             <property name="homogeneous">True</property>
           </packing>
         </child>
+        <style>
+          <class name="menubar"/>
+        </style>
       </object>
       <packing>
         <property name="expand">False</property>
@@ -39,6 +39,8 @@
       <object class="GtkBox" id="content-box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
         <child>
           <object class="GtkNotebook" id="notebook1">
             <property name="visible">True</property>
@@ -47,6 +49,8 @@
               <object class="GtkBox" id="floor-plan-box">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
                 <property name="orientation">vertical</property>
               </object>
             </child>
@@ -56,123 +60,138 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Floorplan</property>
               </object>
+              <packing>
+                <property name="tab_fill">False</property>
+              </packing>
             </child>
-
-	    <child>
-	      <object class="GtkBox" id="guests-hbox">
-		<property name="visible">True</property>
-		<property name="can_focus">False</property>
-		<property name="orientation">horizontal</property>
-		<property name="border_width">12</property>
-		<property name="spacing">12</property>
-
-		<child>
-		  <object class="GtkBox" id="guestlist-box">
-		    <property name="visible">True</property>
-		    <property name="can_focus">False</property>
-		    <property name="orientation">vertical</property>
-
-		    <child>
-		      <object class="GtkScrolledWindow" id="guests-tree-scrolledwindow">
-			<property name="visible">True</property>
-			<property name="can_focus">True</property>
-			<property name="hscrollbar_policy">never</property>
-			<property name="shadow_type">in</property>
-			<child>
-			  <object class="GtkTreeView" id="guestlist-view">
-			    <property name="visible">True</property>
-			    <property name="can_focus">True</property>
-			    <property name="width_request">200</property>
-			    <child internal-child="selection">
-			      <object class="GtkTreeSelection" id="treeview-selection1"/>
-			    </child>
-			  </object>
-			</child>
-		      </object>
-		      <packing>
-			<property name="expand">True</property>
-			<property name="fill">True</property>
-		      </packing>
-		    </child>
-		    
-		    <child>
-		      <object class="GtkToolbar" id="guest_toolbar">
-			<property name="visible">True</property>
-			<property name="can_focus">False</property>
-			<property name="toolbar_style">icons</property>
-			<property name="show_arrow">False</property>
-			<property name="icon_size">1</property>
-			<style>
-			  <class name="inline-toolbar"/>
-			</style>
-			<child>
-			  <object class="GtkToolButton" id="guest-add">
-			    <property name="use_action_appearance">False</property>
-			    <property name="visible">True</property>
-			    <property name="label" translatable="yes">Add Guest</property>
-			    <property name="can_focus">False</property>
-			    <property name="use_underline">True</property>
-			    <property name="icon_name">list-add-symbolic</property>
-			  </object>
-			  <packing>
-			    <property name="expand">False</property>
-			    <property name="homogeneous">True</property>
-			  </packing>
-			</child>
-		    
-			<child>
-			  <object class="GtkToolButton" id="guest-remove">
-			    <property name="use_action_appearance">False</property>
-			    <property name="visible">True</property>
-			    <property name="label" translatable="yes">Remove Guest</property>
-			    <property name="sensitive">False</property>
-			    <property name="can_focus">False</property>
-			    <property name="use_underline">True</property>
-			    <property name="icon_name">list-remove-symbolic</property>
-			  </object>
-			  <packing>
-			    <property name="expand">False</property>
-			    <property name="homogeneous">True</property>
-			  </packing>
-			</child>
-			
-		      </object>
-		      <packing>
-			<property name="expand">False</property>
-			<property name="fill">False</property>
-		      </packing>
-		    </child>
-		  </object>
-		</child>
-		<child>
-		  <object class="GtkBox" id="guest-edit-box">
-		    
-		  </object>
-		  <packing>
-		    <property name="expand">True</property>
-		    <property name="fill">True</property>
-		  </packing>
-		</child>
-	      </object>
-	    </child>
-	      
-	    <child type="tab">
-	      <object class="GtkLabel" id="guests-label">
-		<property name="visible">True</property>
-		<property name="can_focus">False</property>
-		<property name="label" translatable="yes">Guests</property>
-	      </object>
-	      <packing>
-		<property name="tab_fill">False</property>
-	      </packing>
-	    </child>
-	
+            <child>
+              <object class="GtkBox" id="guests-hbox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="border_width">12</property>
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkBox" id="guestlist-box">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkScrolledWindow" id="guests-tree-scrolledwindow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <object class="GtkTreeView" id="guestlist-view">
+                            <property name="width_request">200</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="treeview-selection1"/>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkToolbar" id="guest_toolbar">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="toolbar_style">icons</property>
+                        <property name="show_arrow">False</property>
+                        <property name="icon_size">1</property>
+                        <child>
+                          <object class="GtkToolButton" id="guest-add">
+                            <property name="use_action_appearance">False</property>
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Add Guest</property>
+                            <property name="use_underline">True</property>
+                            <property name="icon_name">list-add-symbolic</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="homogeneous">True</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkToolButton" id="guest-remove">
+                            <property name="use_action_appearance">False</property>
+                            <property name="visible">True</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">False</property>
+                            <property name="label" translatable="yes">Remove Guest</property>
+                            <property name="use_underline">True</property>
+                            <property name="icon_name">list-remove-symbolic</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="homogeneous">True</property>
+                          </packing>
+                        </child>
+                        <style>
+                          <class name="inline-toolbar"/>
+                        </style>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="guest-edit-box">
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child type="tab">
+              <object class="GtkLabel" id="guests-label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Guests</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+                <property name="tab_fill">False</property>
+              </packing>
+            </child>
             <child>
               <object class="GtkBox" id="relations-box">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
                 <property name="orientation">vertical</property>
               </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
             </child>
             <child type="tab">
               <object class="GtkLabel" id="relations-label">
@@ -181,20 +200,23 @@
                 <property name="label" translatable="yes">Relations</property>
               </object>
               <packing>
+                <property name="position">2</property>
                 <property name="tab_fill">False</property>
               </packing>
             </child>
-
-
-	  </object>
-	  <packing>
-	    <property name="expand">True</property>
-	    <property name="fill">True</property>
-	    <property name="position">0</property>
-	  </packing>
-	</child>
-	    
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
       </object>
+      <packing>
+        <property name="expand">True</property>
+        <property name="fill">True</property>
+        <property name="position">1</property>
+      </packing>
     </child>
   </object>
 </interface>
