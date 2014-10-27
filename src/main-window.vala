@@ -17,6 +17,8 @@ tabler is free software: you can redistribute it and/or modify it
  * with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using Gtk;
+
 public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	static const int DEFAULT_WIDTH = 800;
@@ -38,15 +40,10 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		hide_titlebar_when_maximized = true;
 
 		// setup UI
-		builder = new Gtk.Builder ();
+		builder = new Builder.from_resource ("/org/tabler/main-window.ui");
 		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
-		try {
-  			builder.add_from_resource ("/org/tabler/main-window.ui");
-			add (builder.get_object ("main-box") as Gtk.Widget);
-		} catch (GLib.Error error) {
-			// shouldn't happen
-			stderr.printf ("Unable to parse UI definition.\n");
-		}
+		
+		add (builder.get_object ("main-box") as Gtk.Widget);
 
 		// bound action for the save toolbar button
 		var save_button = builder.get_object ("save-button") as Gtk.ToolButton;
@@ -86,10 +83,12 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
 		var remove_button = builder.get_object ("guest-remove") as Gtk.ToolButton;
+		Guest? selected_guest;
 		
 		if (selection.count_selected_rows () == 1) {
 			// set delete button active
 			remove_button.sensitive = true;
+			
 		} else {
 			remove_button.sensitive = false;
 		}	

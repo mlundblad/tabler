@@ -40,7 +40,7 @@ tabler_VALAFLAGS =  \
 tabler_LDFLAGS = \
 	-Wl,--export-dynamic
 
-tabler_LDADD = $(TABLER_LIBS)
+tabler_LDADD = $(TABLER_LIBS) -lm
 
 
 EXTRA_DIST = $(ui_DATA)
