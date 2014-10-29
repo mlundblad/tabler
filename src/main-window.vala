@@ -39,14 +39,18 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		set_default_size (DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		hide_titlebar_when_maximized = true;
 
+		
 		// setup UI
 		builder = new Builder.from_resource ("/org/tabler/main-window.ui");
 		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
 		
 		add (builder.get_object ("main-box") as Gtk.Widget);
 
+		var headerbar = builder.get_object ("headerbar") as Gtk.HeaderBar;
+		set_titlebar (headerbar);
+
 		// bound action for the save toolbar button
-		var save_button = builder.get_object ("save-button") as Gtk.ToolButton;
+		var save_button = builder.get_object ("save-button") as Gtk.Button;
 		save_button.clicked.connect (on_save_clicked);
 
 		// setup the guest list
@@ -112,7 +116,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		listmodel.remove (tree_iter);
 	}
 	
-	private void on_save_clicked (Gtk.ToolButton button) {
+	private void on_save_clicked (Gtk.Button button) {
 		if (file_uri == null) {
 			// show file save dialog
 			var save_dialog =
