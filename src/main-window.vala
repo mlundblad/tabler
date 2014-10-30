@@ -37,8 +37,6 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		title = _("Tabler - Unnamed");
 		window_position = Gtk.WindowPosition.CENTER;
 		set_default_size (DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		hide_titlebar_when_maximized = true;
-
 		
 		// setup UI
 		builder = new Builder.from_resource ("/org/tabler/main-window.ui");
