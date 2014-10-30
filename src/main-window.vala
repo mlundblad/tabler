@@ -19,6 +19,7 @@ tabler is free software: you can redistribute it and/or modify it
 
 using Gtk;
 
+[GtkTemplate (ui = "/org/tabler/main-window.ui")]
 public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	static const int DEFAULT_WIDTH = 800;
@@ -27,7 +28,17 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	private Arrangement arrangement;
 	public string file_uri { get; private set; }
 
-	private Gtk.Builder builder;
+	[GtkChild]
+	private Gtk.Button save_button;
+
+	[GtkChild]
+	private Gtk.TreeView guestlist_view;
+
+	[GtkChild]
+	private Gtk.ToolButton guest_add;
+
+	[GtkChild]
+	private Gtk.ToolButton guest_remove;
 	
     // Constructor
     public MainWindow (Gtk.Application app, Arrangement arrangement) {
@@ -37,23 +48,12 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		title = _("Tabler - Unnamed");
 		window_position = Gtk.WindowPosition.CENTER;
 		set_default_size (DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		
-		// setup UI
-		builder = new Builder.from_resource ("/org/tabler/main-window.ui");
-		builder.set_translation_domain (Config.GETTEXT_PACKAGE);
-		
-		add (builder.get_object ("main-box") as Gtk.Widget);
-
-		var headerbar = builder.get_object ("headerbar") as Gtk.HeaderBar;
-		set_titlebar (headerbar);
 
 		// bound action for the save toolbar button
-		var save_button = builder.get_object ("save-button") as Gtk.Button;
 		save_button.clicked.connect (on_save_clicked);
 
 		// setup the guest list
-		var guest_view = builder.get_object ("guestlist-view") as Gtk.TreeView;
-		setup_guest_list (guest_view);
+		setup_guest_list (guestlist_view);
     }
 
 	private void setup_guest_list (Gtk.TreeView guest_view) {
@@ -76,23 +76,20 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		var selection = guest_view.get_selection ();
 		selection.changed.connect (on_guest_selection_changed);
 
-		var add_button = builder.get_object ("guest-add") as Gtk.ToolButton;
-		add_button.clicked.connect (on_add_clicked);
+		guest_add.clicked.connect (on_add_clicked);
 		
-		var remove_button = builder.get_object ("guest-remove") as Gtk.ToolButton;
-		remove_button.clicked.connect (on_remove_clicked);
+		guest_remove.clicked.connect (on_remove_clicked);
 	}
 
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
-		var remove_button = builder.get_object ("guest-remove") as Gtk.ToolButton;
 		Guest? selected_guest;
 		
 		if (selection.count_selected_rows () == 1) {
 			// set delete button active
-			remove_button.sensitive = true;
+			guest_remove.sensitive = true;
 			
 		} else {
-			remove_button.sensitive = false;
+			guest_remove.sensitive = false;
 		}	
 	}
 
@@ -101,9 +98,8 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	}
 	
 	private void on_remove_clicked (Gtk.ToolButton button) {
-		var guest_view = builder.get_object ("guestlist-view") as Gtk.TreeView;
-		var selection = guest_view.get_selection ();
-		var listmodel = guest_view.get_model () as Gtk.ListStore;
+		var selection = guestlist_view.get_selection ();
+		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
 		Gtk.TreeIter tree_iter;
 		Guest guest;
 		

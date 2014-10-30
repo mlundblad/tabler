@@ -15,7 +15,6 @@ tablerdoc_DATA = \
 
 EXTRA_DIST = $(tablerdoc_DATA)
 
-
 # Remove doc directory on uninstall
 uninstall-local:
 	-rm -r $(tablerdocdir)
