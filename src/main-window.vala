@@ -25,13 +25,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	public string file_uri { get; private set; }
 
 	[GtkChild]
-	private Gtk.Button save_button;
-
-	[GtkChild]
 	private Gtk.TreeView guestlist_view;
-
-	[GtkChild]
-	private Gtk.ToolButton guest_add;
 
 	[GtkChild]
 	private Gtk.ToolButton guest_remove;
@@ -63,11 +57,9 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 			listmodel.append (out iter);
 			listmodel.set (iter, 0, guest.name, 1, guest);
 		}
-
-		var selection = guest_view.get_selection ();
-		selection.changed.connect (on_guest_selection_changed);
 	}
 
+	[GtkCallback]
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
 		Guest? selected_guest;
 		

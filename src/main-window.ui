@@ -87,7 +87,13 @@
 				<property name="visible">True</property>
 				<property name="can_focus">True</property>
 				<child internal-child="selection">
-				  <object class="GtkTreeSelection" id="treeview-selection1"/>
+				  <object class="GtkTreeSelection"
+					  id="treeview-selection1">
+				    <signal name="changed"
+					    handler="on_guest_selection_changed"
+					    object="TablerMainWindow"
+					    swapped="no"/>
+				  </object>
 				</child>
                               </object>
                             </child>
