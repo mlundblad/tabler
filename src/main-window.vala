@@ -21,10 +21,6 @@ using Gtk;
 
 [GtkTemplate (ui = "/org/tabler/main-window.ui")]
 public class Tabler.MainWindow : Gtk.ApplicationWindow {
-
-	static const int DEFAULT_WIDTH = 800;
-	static const int DEFAULT_HEIGHT = 600;
-
 	private Arrangement arrangement;
 	public string file_uri { get; private set; }
 
@@ -45,9 +41,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		Object (application: app);
 		this.arrangement = arrangement;
 
-		title = _("Tabler - Unnamed");
 		window_position = Gtk.WindowPosition.CENTER;
-		set_default_size (DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
 		// bound action for the save toolbar button
 		save_button.clicked.connect (on_save_clicked);
