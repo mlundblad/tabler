@@ -24,9 +24,6 @@
       </object>
     </child>
     <child>
-      <object class="GtkListStore" id="liststore1"/>
-    </child>
-    <child>
       <object class="GtkBox" id="main_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
