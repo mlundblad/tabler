@@ -43,9 +43,6 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 		window_position = Gtk.WindowPosition.CENTER;
 
-		// bound action for the save toolbar button
-		save_button.clicked.connect (on_save_clicked);
-
 		// setup the guest list
 		setup_guest_list (guestlist_view);
     }
@@ -69,10 +66,6 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 		var selection = guest_view.get_selection ();
 		selection.changed.connect (on_guest_selection_changed);
-
-		guest_add.clicked.connect (on_add_clicked);
-		
-		guest_remove.clicked.connect (on_remove_clicked);
 	}
 
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
@@ -87,11 +80,13 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		}	
 	}
 
-	private void on_add_clicked (Gtk.ToolButton button) {
+	[GtkCallback]
+	private void on_guest_add_clicked (Gtk.ToolButton button) {
 		// TODO: show add dialog
 	}
-	
-	private void on_remove_clicked (Gtk.ToolButton button) {
+
+	[GtkCallback]
+	private void on_guest_remove_clicked (Gtk.ToolButton button) {
 		var selection = guestlist_view.get_selection ();
 		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
 		Gtk.TreeIter tree_iter;
@@ -103,7 +98,8 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		arrangement.remove_guest (guest);
 		listmodel.remove (tree_iter);
 	}
-	
+
+	[GtkCallback]
 	private void on_save_clicked (Gtk.Button button) {
 		if (file_uri == null) {
 			// show file save dialog

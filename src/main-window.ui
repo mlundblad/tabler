@@ -20,6 +20,7 @@
             <property name="can_focus">False</property>
             <property name="use_underline">True</property>
 	    <property name="label" translatable="yes">Save</property>
+	    <signal name="clicked" handler="on_save_clicked" 			    object="TablerMainWindow" swapped="no"/>
           </object>
         </child>
         <style>
@@ -112,6 +113,7 @@
 				<property name="label" translatable="yes">Add Guest</property>
 				<property name="use_underline">True</property>
 				<property name="icon_name">list-add-symbolic</property>
+				<signal name="clicked" 			                        handler="on_guest_add_clicked" 			    			object="TablerMainWindow" swapped="no"/>
                               </object>
                               <packing>
 				<property name="expand">False</property>
@@ -127,6 +129,7 @@
 				<property name="label" translatable="yes">Remove Guest</property>
 				<property name="use_underline">True</property>
 				<property name="icon_name">list-remove-symbolic</property>
+				<signal name="clicked" 			                        handler="on_guest_remove_clicked" 			    			object="TablerMainWindow" swapped="no"/>
                               </object>
                               <packing>
 				<property name="expand">False</property>
