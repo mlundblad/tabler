@@ -29,13 +29,14 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	[GtkChild]
 	private Gtk.ToolButton guest_remove;
+
+	[GtkChild]
+	private Gtk.Box guest_edit_box;
 	
     // Constructor
     public MainWindow (Gtk.Application app, Arrangement arrangement) {
 		Object (application: app);
 		this.arrangement = arrangement;
-
-		window_position = Gtk.WindowPosition.CENTER;
 
 		// setup the guest list
 		setup_guest_list (guestlist_view);
@@ -53,6 +54,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 		// add guests
 		Gtk.TreeIter iter;
+
 		foreach (var guest in arrangement.guests.values) {
 			listmodel.append (out iter);
 			listmodel.set (iter, 0, guest.name, 1, guest);
@@ -66,9 +68,10 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		if (selection.count_selected_rows () == 1) {
 			// set delete button active
 			guest_remove.sensitive = true;
-			
+			guest_edit_box.visible = true;
 		} else {
 			guest_remove.sensitive = false;
+			guest_edit_box.visible = false;
 		}	
 	}
 

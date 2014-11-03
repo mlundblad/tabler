@@ -6,6 +6,7 @@
     <property name="title">Tabler</property>
     <property name="default-width">800</property>
     <property name="default-height">600</property>
+    <property name="window-position">center</property>
     <child type="titlebar">
       <object class="GtkHeaderBar" id="headerbar">
 	<property name="title">Tabler</property>
@@ -160,10 +161,34 @@
                       </packing>
                     </child>
                     <child>
+			<!--<object class="GtkEntry" id="guest_name_entry"/>-->
                       <object class="GtkBox" id="guest_edit_box">
 			<property name="can_focus">False</property>
 			<property name="hexpand">True</property>
 			<property name="vexpand">True</property>
+			<property name="orientation">vertical</property>
+			<child>
+			  <object class="GtkBox" id="guest_name_box">
+			    <property name="visible">true</property>
+			    <property name="orientation">horizontal</property>
+			    <child>
+			      <object class="GtkLabel" id="guest_name_label">
+				<property name="visible">true</property>
+				<property name="label" translatable="yes">Name</property>
+			      </object>
+			    </child>
+			    <child>
+			      <object class="GtkEntry" id="guest_name_entry">
+				<property name="visible">true</property>
+			      </object>
+			    </child>
+			  </object>
+			  <packing>
+			    <property name="expand">True</property>
+			    <property name="fill">True</property>
+			    <property name="position">1</property>
+                      	  </packing>
+			</child>
                       </object>
                       <packing>
 			<property name="expand">True</property>
