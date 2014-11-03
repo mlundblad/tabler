@@ -32,6 +32,11 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	[GtkChild]
 	private Gtk.Box guest_edit_box;
+
+	[GtkChild]
+	private Gtk.Entry guest_name_entry;
+	
+	private Guest? selected_guest;
 	
     // Constructor
     public MainWindow (Gtk.Application app, Arrangement arrangement) {
@@ -63,21 +68,40 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	[GtkCallback]
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
-		Guest? selected_guest;
-		
 		if (selection.count_selected_rows () == 1) {
+			selected_guest = get_selected_guest ();
+			load_selected_guest ();
 			// set delete button active
 			guest_remove.sensitive = true;
 			guest_edit_box.visible = true;
+			
 		} else {
 			guest_remove.sensitive = false;
 			guest_edit_box.visible = false;
+			selected_guest = null;
 		}	
 	}
 
 	[GtkCallback]
 	private void on_guest_add_clicked (Gtk.ToolButton button) {
 		// TODO: show add dialog
+	}
+
+	private Guest get_selected_guest () {
+		var selection = guestlist_view.get_selection ();
+		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
+		Gtk.TreeIter tree_iter;
+		Guest guest;
+		
+		selection.get_selected (null, out tree_iter);
+		
+		listmodel.get (tree_iter, 1, out guest);
+
+		return guest;
+	}
+
+	private void load_selected_guest () {
+		guest_name_entry.text = selected_guest.name;
 	}
 
 	[GtkCallback]
