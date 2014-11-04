@@ -44,28 +44,47 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		this.arrangement = arrangement;
 
 		// setup the guest list
-		setup_guest_list (guestlist_view);
+		setup_guest_list ();
     }
 
-	private void setup_guest_list (Gtk.TreeView guest_view) {
-		var listmodel = new Gtk.ListStore (2, typeof (string), typeof (Guest));
+	private void setup_guest_list () {
+		var listmodel = new Gtk.ListStore (1, typeof (Guest));
 
 		listmodel.set_sort_column_id (0, Gtk.SortType.ASCENDING);
+		listmodel.set_sort_func (0, guest_sort_func);
 		
-		guest_view.set_model (listmodel);
-		guest_view.insert_column_with_attributes (-1, _("Name"), 
-		                                          new Gtk.CellRendererText (),
-		                                          "text", 0);
-
+		guestlist_view.set_model (listmodel);
+		guestlist_view.insert_column_with_attributes (-1, _("Name"), 
+		                                          new GuestCellRenderer (),
+		                                          "guest", 0);
+		
 		// add guests
 		Gtk.TreeIter iter;
 
 		foreach (var guest in arrangement.guests.values) {
 			listmodel.append (out iter);
-			listmodel.set (iter, 0, guest.name, 1, guest);
+			listmodel.set (iter, 0, guest);
 		}
 	}
 
+	private class GuestCellRenderer : Gtk.CellRendererText {
+		private Guest _guest;
+		public Guest guest {
+			get { return _guest; }
+			set { _guest = value;
+				  text = value.name; }
+		}
+	}
+
+	private int guest_sort_func (Gtk.TreeModel treemodel,
+	                                      Gtk.TreeIter a, Gtk.TreeIter b) {
+		Guest first, second;
+
+		treemodel.get (a, 0, out first);
+		treemodel.get (b, 0, out second);
+		return first.name.collate (second.name);
+	}
+	
 	[GtkCallback]
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
 		if (selection.count_selected_rows () == 1) {
@@ -95,7 +114,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		
 		selection.get_selected (null, out tree_iter);
 		
-		listmodel.get (tree_iter, 1, out guest);
+		listmodel.get (tree_iter, 0, out guest);
 
 		return guest;
 	}
@@ -105,6 +124,23 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	}
 
 	[GtkCallback]
+	private void on_guest_name_changed () {
+		selected_guest.name = guest_name_entry.text;
+		refresh_selected_guest_in_list ();
+	}
+
+	private void refresh_selected_guest_in_list () {
+		var selection = guestlist_view.get_selection ();
+		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
+		Gtk.TreeIter tree_iter;
+		Guest guest;
+		
+		selection.get_selected (null, out tree_iter);
+		listmodel.get (tree_iter, 0, out guest);
+		listmodel.set (tree_iter, 0, guest);
+	}
+		
+	[GtkCallback]
 	private void on_guest_remove_clicked (Gtk.ToolButton button) {
 		var selection = guestlist_view.get_selection ();
 		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
@@ -112,8 +148,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		Guest guest;
 		
 		selection.get_selected (null, out tree_iter);
-		
-		listmodel.get (tree_iter, 1, out guest);
+		listmodel.get (tree_iter, 0, out guest);
 		arrangement.remove_guest (guest);
 		listmodel.remove (tree_iter);
 	}

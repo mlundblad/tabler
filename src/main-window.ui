@@ -180,6 +180,8 @@
 			    <child>
 			      <object class="GtkEntry" id="guest_name_entry">
 				<property name="visible">true</property>
+				<signal name="changed" handler="on_guest_name_changed"
+					object="TablerMainWindow" swapped="no"/>
 			      </object>
 			    </child>
 			  </object>
