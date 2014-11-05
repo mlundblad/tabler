@@ -77,12 +77,12 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	}
 
 	private int guest_sort_func (Gtk.TreeModel treemodel,
-	                                      Gtk.TreeIter a, Gtk.TreeIter b) {
+	                             Gtk.TreeIter a, Gtk.TreeIter b) {
 		Guest first, second;
 
 		treemodel.get (a, 0, out first);
 		treemodel.get (b, 0, out second);
-		return first.name.collate (second.name);
+		return first.compare_to (second);
 	}
 	
 	[GtkCallback]
