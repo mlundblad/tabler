@@ -106,13 +106,18 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		// TODO: show add dialog
 	}
 
-	private Guest get_selected_guest () {
+	private Gtk.TreeIter get_iter_for_selected_guest () {
 		var selection = guestlist_view.get_selection ();
-		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
 		Gtk.TreeIter tree_iter;
-		Guest guest;
 		
 		selection.get_selected (null, out tree_iter);
+		return tree_iter;
+	}
+		
+	private Guest get_selected_guest () {
+		var tree_iter = get_iter_for_selected_guest ();
+		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
+		Guest guest;
 		
 		listmodel.get (tree_iter, 0, out guest);
 
@@ -130,24 +135,20 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	}
 
 	private void refresh_selected_guest_in_list () {
-		var selection = guestlist_view.get_selection ();
+		var tree_iter = get_iter_for_selected_guest ();
 		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
-		Gtk.TreeIter tree_iter;
 		Guest guest;
 		
-		selection.get_selected (null, out tree_iter);
 		listmodel.get (tree_iter, 0, out guest);
 		listmodel.set (tree_iter, 0, guest);
 	}
 		
 	[GtkCallback]
 	private void on_guest_remove_clicked (Gtk.ToolButton button) {
-		var selection = guestlist_view.get_selection ();
+		var tree_iter = get_iter_for_selected_guest ();
 		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
-		Gtk.TreeIter tree_iter;
 		Guest guest;
 		
-		selection.get_selected (null, out tree_iter);
 		listmodel.get (tree_iter, 0, out guest);
 		arrangement.remove_guest (guest);
 		listmodel.remove (tree_iter);
