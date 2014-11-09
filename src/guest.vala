@@ -38,7 +38,7 @@ public class Tabler.Guest :
 	}
 	
     // Constructor
-    public Guest (string name, Gender gender = Gender.UNKNOWN,
+    public Guest (string name = "", Gender gender = Gender.UNKNOWN,
                   bool vip = false, bool rsvp = false) {
 		Object (id: next_id, name: name, gender: gender, vip: vip, rsvp: rsvp);
 		guest_map.set (next_id, this);

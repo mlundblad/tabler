@@ -37,6 +37,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	private Gtk.Entry guest_name_entry;
 	
 	private Guest? selected_guest;
+	private bool editing_new_guest = false;
 	
     // Constructor
     public MainWindow (Gtk.Application app, Arrangement arrangement) {
@@ -87,6 +88,8 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	
 	[GtkCallback]
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
+		editing_new_guest = false;
+
 		if (selection.count_selected_rows () == 1) {
 			selected_guest = get_selected_guest ();
 			load_selected_guest ();
@@ -103,7 +106,15 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	[GtkCallback]
 	private void on_guest_add_clicked (Gtk.ToolButton button) {
-		// TODO: show add dialog
+		editing_new_guest = true;
+		selected_guest = new Guest();
+		load_selected_guest ();
+		guest_edit_box.visible = true;
+
+		// unselect any previous selection (a new entry will be created
+		// when new guest name has been edited
+		var selection = guestlist_view.get_selection ();
+		selection.unselect_all ();
 	}
 
 	private Gtk.TreeIter get_iter_for_selected_guest () {
@@ -131,6 +142,23 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	[GtkCallback]
 	private void on_guest_name_changed () {
 		selected_guest.name = guest_name_entry.text;
+
+		// if editing a new guest and the name has been entered,
+		// create a new entry and insert it to the model and the list widget
+		if (editing_new_guest && selected_guest.name.length > 0) {
+			arrangement.add_guest (selected_guest);
+			var listmodel = guestlist_view.get_model () as Gtk.ListStore;
+			Gtk.TreeIter iter;
+
+			listmodel.append (out iter);
+			listmodel.set (iter, 0, selected_guest);
+
+			var selection = guestlist_view.get_selection ();
+
+			selection.select_iter (iter);
+			editing_new_guest = false;
+		}
+
 		refresh_selected_guest_in_list ();
 	}
 
