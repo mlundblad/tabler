@@ -174,7 +174,7 @@
 			    <child>
 			      <object class="GtkLabel" id="guest_name_label">
 				<property name="visible">true</property>
-				<property name="label" translatable="yes">Name</property>
+				<property name="label" translatable="yes">Name:</property>
 			      </object>
 			    </child>
 			    <child>
@@ -190,6 +190,31 @@
 			    <property name="fill">True</property>
 			    <property name="position">1</property>
                       	  </packing>
+			</child>
+			<child>
+			  <object class="GtkBox" id="guest_gender_box">
+			     <property name="orientation">horizontal</property>
+			     <property name="visible">True</property>
+			     <child>
+				<object class="GtkLabel" id="guest_gender_label">
+				  <property name="visible">true</property>
+				  <property name="label" translatable="yes">Gender:
+				  </property>
+			      </object>
+			     </child>
+			     <child>
+			       <object class="GtkComboBoxText" id="guest_gender_combobox">
+  				 <property name="visible">true</property>
+				 <items>
+    				   <item translatable="yes">Unknown</item>
+    				   <item translatable="yes">Male</item>
+    				   <item translatable="yes">Female</item>
+  				 </items>
+				 <signal name="changed" handler="on_guest_gender_changed"
+					object="TablerMainWindow" swapped="no"/>
+			       </object>
+			     </child>
+			  </object>
 			</child>
                       </object>
                       <packing>

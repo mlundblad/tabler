@@ -35,6 +35,9 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	[GtkChild]
 	private Gtk.Entry guest_name_entry;
+
+	[GtkChild]
+	private Gtk.ComboBoxText guest_gender_combobox;
 	
 	private Guest? selected_guest;
 	private bool editing_new_guest = false;
@@ -137,6 +140,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	private void load_selected_guest () {
 		guest_name_entry.text = selected_guest.name;
+		guest_gender_combobox.active = selected_guest.gender;
 	}
 
 	[GtkCallback]
@@ -160,6 +164,11 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		}
 
 		refresh_selected_guest_in_list ();
+	}
+
+	[GtkCallback]
+	private void on_guest_gender_changed () {
+		selected_guest.gender = (Gender) guest_gender_combobox.active;
 	}
 
 	private void refresh_selected_guest_in_list () {
