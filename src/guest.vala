@@ -25,6 +25,7 @@ public class Tabler.Guest :
 	public uint id { get; set; }
 	public string name { get; set; }
 	public Gender gender { get; set; }
+	public bool child { get; set; }
 	public bool vip { get; set; }
 	public bool rsvp { get; set; }
 	private Gee.HashMap<Guest, Relation> relations =
@@ -39,15 +40,16 @@ public class Tabler.Guest :
 	
     // Constructor
     public Guest (string name = "", Gender gender = Gender.UNKNOWN,
-                  bool vip = false, bool rsvp = false) {
-		Object (id: next_id, name: name, gender: gender, vip: vip, rsvp: rsvp);
+                  bool child = false, bool vip = false, bool rsvp = false) {
+		Object (id: next_id, name: name, gender: gender, child: child, vip: vip,
+		        rsvp: rsvp);
 		guest_map.set (next_id, this);
 		next_id++;
     }
 
 	public Guest.with_id (uint id, string name, Gender gender = Gender.UNKNOWN,
-	                      bool vip = false, bool rsvp = false) {
-		Object (id: id, name: name, gender: gender, vip: vip, rsvp: rsvp);
+	                      bool child = false, bool vip = false, bool rsvp = false) {
+		Object (id: id, name: name, gender: gender, child: child, vip: vip, rsvp: rsvp);
 		guest_map.set (id, this);
 		if (id > next_id) {
 			next_id = id + 1;
@@ -86,6 +88,7 @@ public class Tabler.Guest :
 		node->new_prop ("gender",
 		                gender == Gender.MALE ? "male" :
 			            gender == Gender.FEMALE ? "female" : "unknown");
+		node->new_prop ("child", child.to_string ());
 		node->new_prop ("vip", vip.to_string ());
 		node->new_prop ("rsvp", rsvp.to_string ());
 						

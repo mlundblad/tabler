@@ -24,6 +24,7 @@ public class Tabler.GuestParser : GLib.Object {
 		var id = node->get_prop ("id");
 		var name = node->get_prop ("name");
 		var gender = node->get_prop ("gender");
+		var child = node->get_prop ("child");
 		var vip = node->get_prop ("vip");
 		var rsvp = node->get_prop ("rsvp");
 
@@ -39,6 +40,7 @@ public class Tabler.GuestParser : GLib.Object {
 			              		  gender == "male" ? Gender.MALE :
 			              	      gender == "female" ? Gender.FEMALE :
 			                      Gender.UNKNOWN,
+			                      bool.parse (child ?? "false"),
 			          			  bool.parse (vip ?? "false"),
 			                      bool.parse (rsvp ?? "false"));
 	}
