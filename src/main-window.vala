@@ -91,18 +91,17 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	
 	[GtkCallback]
 	private void on_guest_selection_changed (Gtk.TreeSelection selection) {
-		editing_new_guest = false;
-
 		if (selection.count_selected_rows () == 1) {
+			editing_new_guest = false;
 			selected_guest = get_selected_guest ();
 			load_selected_guest ();
 			// set delete button active
 			guest_remove.sensitive = true;
 			guest_edit_box.visible = true;
-			
-		} else {
+		} else if (!editing_new_guest) {
 			guest_remove.sensitive = false;
 			guest_edit_box.visible = false;
+			
 			selected_guest = null;
 		}	
 	}
@@ -112,15 +111,16 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		editing_new_guest = true;
 		selected_guest = new Guest();
 		load_selected_guest ();
-		guest_edit_box.visible = true;
 
 		// unselect any previous selection (a new entry will be created
 		// when new guest name has been edited
 		var selection = guestlist_view.get_selection ();
 		selection.unselect_all ();
+		// the edit box should be visible for the new item, so we don't "lose" it
+		guest_edit_box.visible = true;
 	}
 
-	private Gtk.TreeIter get_iter_for_selected_guest () {
+	private Gtk.TreeIter? get_iter_for_selected_guest () {
 		var selection = guestlist_view.get_selection ();
 		Gtk.TreeIter tree_iter;
 		
@@ -128,12 +128,14 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		return tree_iter;
 	}
 		
-	private Guest get_selected_guest () {
+	private Guest? get_selected_guest () {
 		var tree_iter = get_iter_for_selected_guest ();
 		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
-		Guest guest;
-		
-		listmodel.get (tree_iter, 0, out guest);
+		Guest? guest = null;
+
+		if (tree_iter != null) {
+			listmodel.get (tree_iter, 0, out guest);
+		}
 
 		return guest;
 	}
@@ -161,9 +163,9 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 			selection.select_iter (iter);
 			editing_new_guest = false;
+		} else {
+			refresh_selected_guest_in_list ();
 		}
-
-		refresh_selected_guest_in_list ();
 	}
 
 	[GtkCallback]
@@ -175,9 +177,11 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		var tree_iter = get_iter_for_selected_guest ();
 		var listmodel = guestlist_view.get_model () as Gtk.ListStore;
 		Guest guest;
-		
-		listmodel.get (tree_iter, 0, out guest);
-		listmodel.set (tree_iter, 0, guest);
+
+		if (tree_iter != null) {
+			listmodel.get (tree_iter, 0, out guest);
+			listmodel.set (tree_iter, 0, guest);
+		}
 	}
 		
 	[GtkCallback]
