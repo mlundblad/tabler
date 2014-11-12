@@ -118,13 +118,17 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		selection.unselect_all ();
 		// the edit box should be visible for the new item, so we don't "lose" it
 		guest_edit_box.visible = true;
+		guest_name_entry.grab_focus ();
 	}
 
 	private Gtk.TreeIter? get_iter_for_selected_guest () {
 		var selection = guestlist_view.get_selection ();
-		Gtk.TreeIter tree_iter;
-		
-		selection.get_selected (null, out tree_iter);
+		Gtk.TreeIter? tree_iter = null;
+
+		if (selection.count_selected_rows () == 1) {
+			selection.get_selected (null, out tree_iter);
+		}
+
 		return tree_iter;
 	}
 		
