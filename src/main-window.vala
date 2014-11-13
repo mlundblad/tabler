@@ -38,7 +38,16 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 	[GtkChild]
 	private Gtk.ComboBoxText guest_gender_combobox;
+
+	[GtkChild]
+	private Gtk.CheckButton guest_child_checkbutton;
+
+	[GtkChild]
+	private Gtk.CheckButton guest_vip_checkbutton;
 	
+	[GtkChild]
+	private Gtk.CheckButton guest_rsvp_checkbutton;
+
 	private Guest? selected_guest;
 	private bool editing_new_guest = false;
 	
@@ -147,6 +156,9 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	private void load_selected_guest () {
 		guest_name_entry.text = selected_guest.name;
 		guest_gender_combobox.active = selected_guest.gender;
+		guest_child_checkbutton.active = selected_guest.child;
+		guest_vip_checkbutton.active = selected_guest.vip;
+		guest_rsvp_checkbutton.active = selected_guest.rsvp;
 	}
 
 	[GtkCallback]
@@ -177,6 +189,21 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		selected_guest.gender = (Gender) guest_gender_combobox.active;
 	}
 
+	[GtkCallback]
+	private void on_guest_child_toggled () {
+		selected_guest.child = guest_child_checkbutton.active;
+	}
+
+	[GtkCallback]
+	private void on_guest_vip_toggled () {
+		selected_guest.vip = guest_vip_checkbutton.active;
+	}
+
+	[GtkCallback]
+	private void on_guest_rsvp_toggled () {
+		selected_guest.rsvp = guest_rsvp_checkbutton.active;
+	}
+	
 	private void refresh_selected_guest_in_list () {
 		var tree_iter = get_iter_for_selected_guest ();
 		var listmodel = guestlist_view.get_model () as Gtk.ListStore;

@@ -186,8 +186,8 @@
 			    </child>
 			  </object>
 			  <packing>
-			    <property name="expand">True</property>
-			    <property name="fill">True</property>
+			    <!--<property name="expand">True</property>-->
+			    <!--<property name="fill">True</property>-->
 			    <property name="position">1</property>
                       	  </packing>
 			</child>
@@ -211,6 +211,48 @@
     				   <item translatable="yes">Female</item>
   				 </items>
 				 <signal name="changed" handler="on_guest_gender_changed"
+					object="TablerMainWindow" swapped="no"/>
+			       </object>
+			     </child>
+			  </object>
+			</child>
+			<child>
+			  <object class="GtkBox" id="guest_child_box">
+			     <property name="orientation">horizontal</property>
+			     <property name="visible">True</property>
+			     <child>
+			       <object class="GtkCheckButton" id="guest_child_checkbutton">
+  				 <property name="visible">True</property>
+				 <property name="label" translatable="yes">Child</property>
+				 <signal name="toggled" handler="on_guest_child_toggled"
+					object="TablerMainWindow" swapped="no"/>
+			       </object>
+			     </child>
+			  </object>
+			</child>
+			<child>
+			  <object class="GtkBox" id="guest_vip_box">
+			     <property name="orientation">horizontal</property>
+			     <property name="visible">True</property>
+			     <child>
+			       <object class="GtkCheckButton" id="guest_vip_checkbutton">
+  				 <property name="visible">True</property>
+				 <property name="label" translatable="yes">VIP</property>
+				 <signal name="toggled" handler="on_guest_vip_toggled"
+					object="TablerMainWindow" swapped="no"/>
+			       </object>
+			     </child>
+			  </object>
+			</child>
+			<child>
+			  <object class="GtkBox" id="guest_rsvp_box">
+			     <property name="orientation">horizontal</property>
+			     <property name="visible">True</property>
+			     <child>
+			       <object class="GtkCheckButton" id="guest_rsvp_checkbutton">
+  				 <property name="visible">True</property>
+				 <property name="label" translatable="yes">RSVP</property>
+				 <signal name="toggled" handler="on_guest_rsvp_toggled"
 					object="TablerMainWindow" swapped="no"/>
 			       </object>
 			     </child>
