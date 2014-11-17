@@ -31,7 +31,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	private Gtk.ToolButton guest_remove;
 
 	[GtkChild]
-	private Gtk.Box guest_edit_box;
+	private Gtk.Grid guest_edit_grid;
 
 	[GtkChild]
 	private Gtk.Entry guest_name_entry;
@@ -106,10 +106,10 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 			load_selected_guest ();
 			// set delete button active
 			guest_remove.sensitive = true;
-			guest_edit_box.visible = true;
+			guest_edit_grid.visible = true;
 		} else if (!editing_new_guest) {
 			guest_remove.sensitive = false;
-			guest_edit_box.visible = false;
+			guest_edit_grid.visible = false;
 			
 			selected_guest = null;
 		}	
@@ -126,7 +126,7 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 		var selection = guestlist_view.get_selection ();
 		selection.unselect_all ();
 		// the edit box should be visible for the new item, so we don't "lose" it
-		guest_edit_box.visible = true;
+		guest_edit_grid.visible = true;
 		guest_name_entry.grab_focus ();
 	}
 

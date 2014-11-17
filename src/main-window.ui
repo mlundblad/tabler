@@ -161,104 +161,118 @@
                       </packing>
                     </child>
                     <child>
-			<!--<object class="GtkEntry" id="guest_name_entry"/>-->
-                      <object class="GtkBox" id="guest_edit_box">
-			<property name="can_focus">False</property>
-			<property name="hexpand">True</property>
-			<property name="vexpand">True</property>
-			<property name="orientation">vertical</property>
+		      <object class="GtkGrid" id="guest_edit_grid">
+			<property name="visible">True</property>
+    			<property name="can_focus">False</property>
+    			<property name="valign">start</property>
+    			<property name="margin_start">12</property>
+    			<property name="margin_end">12</property>
+    			<property name="margin_top">12</property>
+    			<property name="margin_bottom">12</property>
+    			<property name="hexpand">True</property>
+    			<property name="vexpand">True</property>
+    			<property name="row_spacing">6</property>
+    			<property name="column_spacing">6</property>
+	
 			<child>
-			  <object class="GtkBox" id="guest_name_box">
+			  <object class="GtkLabel" id="guest_name_label">
 			    <property name="visible">true</property>
-			    <property name="orientation">horizontal</property>
-			    <child>
-			      <object class="GtkLabel" id="guest_name_label">
-				<property name="visible">true</property>
-				<property name="label" translatable="yes">Name:</property>
-			      </object>
-			    </child>
-			    <child>
-			      <object class="GtkEntry" id="guest_name_entry">
-				<property name="visible">true</property>
-				<signal name="changed" handler="on_guest_name_changed"
-					object="TablerMainWindow" swapped="no"/>
-			      </object>
-			    </child>
+		            <property name="label" translatable="yes">Name:</property>
 			  </object>
 			  <packing>
-			    <!--<property name="expand">True</property>-->
-			    <!--<property name="fill">True</property>-->
-			    <property name="position">1</property>
-                      	  </packing>
+        		    <property name="left_attach">0</property>
+        		    <property name="top_attach">0</property>
+          		    <property name="width">1</property>
+        		    <property name="height">1</property>
+      			  </packing>
 			</child>
 			<child>
-			  <object class="GtkBox" id="guest_gender_box">
-			     <property name="orientation">horizontal</property>
-			     <property name="visible">True</property>
-			     <child>
-				<object class="GtkLabel" id="guest_gender_label">
-				  <property name="visible">true</property>
-				  <property name="label" translatable="yes">Gender:
-				  </property>
-			      </object>
-			     </child>
-			     <child>
-			       <object class="GtkComboBoxText" id="guest_gender_combobox">
-  				 <property name="visible">true</property>
-				 <items>
-    				   <item translatable="yes">Unknown</item>
-    				   <item translatable="yes">Male</item>
-    				   <item translatable="yes">Female</item>
-  				 </items>
-				 <signal name="changed" handler="on_guest_gender_changed"
+			  <object class="GtkEntry" id="guest_name_entry">
+			    <property name="visible">true</property>
+				<signal name="changed" handler="on_guest_name_changed"
 					object="TablerMainWindow" swapped="no"/>
-			       </object>
-			     </child>
 			  </object>
+			  <packing>
+        		    <property name="left_attach">1</property>
+        		    <property name="top_attach">0</property>
+          		    <property name="width">1</property>
+        		    <property name="height">1</property>
+      			  </packing>
 			</child>
 			<child>
-			  <object class="GtkBox" id="guest_child_box">
-			     <property name="orientation">horizontal</property>
-			     <property name="visible">True</property>
-			     <child>
-			       <object class="GtkCheckButton" id="guest_child_checkbutton">
-  				 <property name="visible">True</property>
-				 <property name="label" translatable="yes">Child</property>
-				 <signal name="toggled" handler="on_guest_child_toggled"
-					object="TablerMainWindow" swapped="no"/>
-			       </object>
-			     </child>
+			  <object class="GtkLabel" id="guest_gender_label">
+			    <property name="visible">true</property>
+			    <property name="label" translatable="yes">Gender:
+			    </property>
 			  </object>
+			  <packing>
+        		    <property name="left_attach">0</property>
+        		    <property name="top_attach">1</property>
+          		    <property name="width">1</property>
+        		    <property name="height">1</property>
+      			  </packing>
 			</child>
 			<child>
-			  <object class="GtkBox" id="guest_vip_box">
-			     <property name="orientation">horizontal</property>
-			     <property name="visible">True</property>
-			     <child>
-			       <object class="GtkCheckButton" id="guest_vip_checkbutton">
-  				 <property name="visible">True</property>
-				 <property name="label" translatable="yes">VIP</property>
-				 <signal name="toggled" handler="on_guest_vip_toggled"
-					object="TablerMainWindow" swapped="no"/>
-			       </object>
-			     </child>
+		       	  <object class="GtkComboBoxText" id="guest_gender_combobox">
+			    <property name="visible">true</property>
+			    <items>
+			      <item translatable="yes">Unknown</item>
+			      <item translatable="yes">Male</item>
+			      <item translatable="yes">Female</item>
+			    </items>
+			   <signal name="changed" handler="on_guest_gender_changed"
+				object="TablerMainWindow" swapped="no"/>
+		          </object>
+			  <packing>
+        		    <property name="left_attach">1</property>
+        		    <property name="top_attach">1</property>
+          		    <property name="width">1</property>
+        		    <property name="height">1</property>
+      			  </packing>
+		        </child>
+			<child>
+			  <object class="GtkCheckButton" id="guest_child_checkbutton">
+  			     <property name="visible">True</property>
+			     <property name="label" translatable="yes">Child</property>
+			       <signal name="toggled" handler="on_guest_child_toggled"
+				       object="TablerMainWindow" swapped="no"/>
 			  </object>
+			  <packing>
+        		    <property name="left_attach">0</property>
+        		    <property name="top_attach">2</property>
+          		    <property name="width">2</property>
+        		    <property name="height">1</property>
+      			  </packing>
+		        </child>
+			<child>
+			  <object class="GtkCheckButton" id="guest_vip_checkbutton">
+  			    <property name="visible">True</property>
+			    <property name="label" translatable="yes">VIP</property>
+			      <signal name="toggled" handler="on_guest_vip_toggled"
+				      object="TablerMainWindow" swapped="no"/>
+			  </object>
+			  <packing>
+        		    <property name="left_attach">0</property>
+        		    <property name="top_attach">3</property>
+          		    <property name="width">2</property>
+        		    <property name="height">1</property>
+      			  </packing>
 			</child>
 			<child>
-			  <object class="GtkBox" id="guest_rsvp_box">
-			     <property name="orientation">horizontal</property>
-			     <property name="visible">True</property>
-			     <child>
-			       <object class="GtkCheckButton" id="guest_rsvp_checkbutton">
-  				 <property name="visible">True</property>
-				 <property name="label" translatable="yes">RSVP</property>
-				 <signal name="toggled" handler="on_guest_rsvp_toggled"
+			  <object class="GtkCheckButton" id="guest_rsvp_checkbutton">
+  			    <property name="visible">True</property>
+			    <property name="label" translatable="yes">RSVP</property>
+			      <signal name="toggled" handler="on_guest_rsvp_toggled"
 					object="TablerMainWindow" swapped="no"/>
-			       </object>
-			     </child>
 			  </object>
-			</child>
-                      </object>
+			  <packing>
+        		    <property name="left_attach">0</property>
+        		    <property name="top_attach">4</property>
+          		    <property name="width">2</property>
+        		    <property name="height">1</property>
+      			  </packing>
+		        </child>
+		      </object>
                       <packing>
 			<property name="expand">True</property>
 			<property name="fill">True</property>
