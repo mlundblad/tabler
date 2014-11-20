@@ -21,13 +21,13 @@ using Gee;
 
 public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 
-	public Gee.HashMap<string, Guest> guests { get; private set; }
+	public Gee.Map<string, Guest> guests { get; private set; }
 	public Gee.List<Room> rooms { get; private set; }
 
 	public string name { get; set; }
 	
 	public Arrangement () {
-		guests = new Gee.HashMap<string, Guest> ();
+		guests = new Gee.TreeMap<string, Guest> ();
 		rooms = new Gee.ArrayList<Room> ();
 	}
 

@@ -32,7 +32,7 @@ tabler_SOURCES = \
 	long-table.vala gender.vala xml-serializable.vala arrangement.vala \
 	file-utils.vala arrangement-parser.vala room-parser.vala guest-parser.vala \
 	table-parser.vala long-table-parser.vala round-table-parser.vala \
-	main-window.vala relation.vala application.vala tabler-resources.c
+	main-window.vala relation.vala application.vala tabler-resources.c relations-editor.vala
 
 tabler_VALAFLAGS =  \
 	--target-glib=2.38 --gresources tabler.gresource.xml --pkg gtk+-3.0 --pkg gee-1.0 --pkg libxml-2.0 --pkg gio-2.0

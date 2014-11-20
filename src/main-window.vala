@@ -48,6 +48,9 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 	[GtkChild]
 	private Gtk.CheckButton guest_rsvp_checkbutton;
 
+	[GtkChild]
+	private RelationsEditor relations_editor;
+	
 	private Guest? selected_guest;
 	private bool editing_new_guest = false;
 	
@@ -58,6 +61,9 @@ public class Tabler.MainWindow : Gtk.ApplicationWindow {
 
 		// setup the guest list
 		setup_guest_list ();
+
+		relations_editor.arrangement = arrangement;
+		relations_editor.update_arrangement ();
     }
 
 	private void setup_guest_list () {
