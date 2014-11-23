@@ -21,22 +21,26 @@ using Gee;
 
 public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 
-	public Gee.Map<string, Guest> guests { get; private set; }
+	public Gee.Map<uint, Guest> guests { get; private set; }
 	public Gee.List<Room> rooms { get; private set; }
 
 	public string name { get; set; }
+
+	public signal void guest_added (Guest guest);
+	public signal void guest_removed (Guest guest);
 	
 	public Arrangement () {
-		guests = new Gee.TreeMap<string, Guest> ();
+		guests = new Gee.TreeMap<uint, Guest> ();
 		rooms = new Gee.ArrayList<Room> ();
 	}
 
 	public void add_guest (Guest guest) {
-		guests.set (guest.name, guest);
+		guests.set (guest.id, guest);
+		guest_added (guest);
 	}
 
 	public void remove_guest (Guest guest) {
-		guests.unset (guest.name);
+		guests.unset (guest.id);
 
 		// remove guest from tables
 		foreach (var room in rooms) {
@@ -44,6 +48,8 @@ public class Tabler.Arrangement : GLib.Object, Tabler.XmlSerializable {
 				slot.table.unset_guest (guest);
 			}
 		}
+
+		guest_removed (guest);
 	}
 
 	public void add_room (Room room) {
